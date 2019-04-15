@@ -1,5 +1,7 @@
 package com.car.analyse.mapper;
 
+import java.util.List;
+
 import com.car.analyse.model.TbStaffUser;
 
 public interface TbStaffUserMapper {
@@ -14,4 +16,6 @@ public interface TbStaffUserMapper {
     int updateByPrimaryKeySelective(TbStaffUser record);
 
     int updateByPrimaryKey(TbStaffUser record);
+    
+    List<TbStaffUser> selectAllStaffUsers();
 }

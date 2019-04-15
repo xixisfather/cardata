@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>内部用户信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/demo.css">
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+
+<script>
+	function newStaffDialog() {
+		$('#dlg').dialog('open').dialog('setTitle', '新增内部用户');
+		$('#staffUserForm').form('clear');
+		url = '/staffuser/insertstaffuser';
+	}
+
+	function saveStaffUser() {
+
+	}
+</script>
+</head>
+
+<body>
+	<table id="staffUserTable" title="内部用户" class="easyui-datagrid"
+		url="/staffuser/querystaffuser" toolbar="#toolbar" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="id" width="25%">ID</th>
+				<th field="userName" width="25%">用户名</th>
+				<th field="fullName" width="25%">全名</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+			onclick="newStaffDialog()">添加</a>
+	</div>
+
+	<div id="dlg" class="easyui-dialog"
+		style="width: 400px; height: 280px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">内部用户信息</div>
+		<form id="staffUserForm" method="post">
+			<div class="fitem">功能开发中</div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
+			onclick="saveStaffUser()">保存</a> <a href="#"
+			class="easyui-linkbutton" iconCls="icon-cancel"
+			onclick="javascript:$('#dlg').dialog('close')">取消</a>
+	</div>
+</body>
+</html>

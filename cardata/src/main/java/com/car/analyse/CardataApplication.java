@@ -1,5 +1,4 @@
 package com.car.analyse;
-
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
