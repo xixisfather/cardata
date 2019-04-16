@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>内部用户信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/demo.css">
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+</head>
+
+<body>
+	<table id="shsjAnalyseTable" title="售后数据分析" class="easyui-datagrid"
+		url="/shsjanalyse/shsjanalysequery" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="year" width="12%">时间(自然年)</th>
+				<th field="gds" width="8%">工单数</th>
+				<th field="jczcs" width="8%">进厂总次数</th>
+				<th field="yxkhs" width="8%">有效客户数</th>
+				<th field="shzcz" width="8%">售后总产值</th>
+				<th field="yxkhzzl" width="8%">有效客户增长率</th>
+				<th field="pjjcpc" width="8%">平均进厂频次</th>
+				<th field="yxkhpjjcpc" width="8%">有效客户平均进厂频次</th>
+				<th field="dgkhgx" width="8%">单个客户贡献</th>
+				<th field="xzkhs" width="8%">新增客户数</th>
+				<th field="lskhs" width="8%">流失客户数</th>
+				<th field="xzlsb" width="9%">新增流失比</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>

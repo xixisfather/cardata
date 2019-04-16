@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.analyse.mapper.ShsjMapper">
+	<resultMap id="BaseAnalyseResultMap"
+		type="com.car.analyse.dto.ShsjAnalyseDTO">
+		<result column="gds" jdbcType="INTEGER" property="gds" />
+		<result column="jcs" jdbcType="INTEGER" property="jcs" />
+		<result column="yxyhs" jdbcType="INTEGER" property="yxyhs" />
+		<result column="shzcz" jdbcType="DOUBLE" property="shzcz" />
+		<result column="yxkhzzl" jdbcType="DOUBLE" property="yxkhzzl" />
+		<result column="pjjcpc" jdbcType="DOUBLE" property="pjjcpc" />
+		<result column="yxkhpjjcpc" jdbcType="DOUBLE"
+			property="yxkhpjjcpc" />
+		<result column="dgkhgx" jdbcType="DOUBLE" property="dgkhgx" />
+		<result column="xzkhs" jdbcType="INTEGER" property="xzkhs" />
+		<result column="lskhs" jdbcType="INTEGER" property="lskhs" />
+		<result column="xzlsb" jdbcType="DOUBLE" property="xzlsb" />
+		<result column="year" jdbcType="INTEGER" property="year" />
+	</resultMap>
+
+	<select id="shsjAnalyse" parameterType="java.lang.Integer"
+		resultMap="BaseAnalyseResultMap">
+		select
+		${year} as year,
+		(select count(vin) as gds from ${year}shsj) as
+		gds,
+		(select count(vin) as jczcs from
+		(
+		select vin from ${year}shsj group
+		by vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t) as jczcs,
+		(select count(vin)
+		as yxkhs
+		from
+		(
+		select vin from ${year}shsj where wxsrll > 0 and jssj is
+		not null group by
+		vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t) as yxkhs,
+		(select sum(wxsrll) as shzcz from ${year}shsj) as shzcz,
+
+		<choose>
+			<when test="year == 2017">
+				'0.00' as yxkhzzl,
+			</when>
+			<otherwise>
+				((select count(vin) as yxyhs
+				from
+				(
+				select vin from
+				${year}shsj where
+				wxsrll > 0 and jssj is not null group by
+				vin,DATE_FORMAT(jssj,
+				'%Y-%m-%d')
+				) t) - (select count(vin) as yxyhs
+				from
+				(
+				select vin from
+				${year-1}shsj where wxsrll > 0 and jssj is not null
+				group by
+				vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+				) t)) / (select count(vin)
+				as yxyhs
+				from
+				(
+				select vin from ${year}shsj where wxsrll > 0 and jssj
+				is not null
+				group by
+				vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+				) t) as yxkhzzl,
+			</otherwise>
+		</choose>
+		(select
+		count(vin) as jczcs from
+		(
+		select vin from ${year}shsj group by
+		vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t)/(select count(distinct vin) as
+		gds from ${year}shsj) as pjjcpc,
+		(select count(vin) as yxyhs
+		from
+		(
+		select vin from ${year}shsj where wxsrll > 0 and jssj is not null
+		group by
+		vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t) / (select count(vin) as
+		jczcs from
+		(
+		select vin from ${year}shsj group by vin,DATE_FORMAT(jssj,
+		'%Y-%m-%d')
+		) t) as yxkhpjjcpc,
+		(select sum(wxsrll) as shzcz from
+		${year}shsj) /
+		(select count(vin) as jczcs from
+		(
+		select vin from
+		${year}shsj group by vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t) as dgkhgx,
+
+		<choose>
+			<when test="year == 2017">
+				'0' as xzkhs,
+			</when>
+			<otherwise>
+				(select count(distinct vin) from ${year}shsj a where a.vin
+				not in
+				(select vin
+				from ${year-1}shsj)) as xzkhs,
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="year == 2017">
+				'0' as xzkhs,
+			</when>
+			<otherwise>
+				(select count(distinct vin) from ${year}shsj a where a.vin
+				not in
+				(select vin
+				from ${year-1}shsj)) as xzkhs,
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="year == 2017">
+				'0' as lskhs,
+			</when>
+			<otherwise>
+				(select count(distinct vin) from
+				${year-1}shsj a where a.wxsrll>0 and a.vin
+				not in
+				(select vin from
+				${year}shsj where wxsrll>0)) as lskhs,
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="year == 2017">
+				'0' as xzlsb
+			</when>
+			<otherwise>
+				(select
+				count(distinct vin) from
+				${year}shsj a where a.vin not in (select vin
+				from ${year-1}shsj))/(select
+				count(distinct vin) from ${year-1}shsj a where
+				a.wxsrll>0 and a.vin not in
+				(select vin from ${year}shsj where
+				wxsrll>0))
+				as xzlsb
+			</otherwise>
+		</choose>
+	</select>
+</mapper>
