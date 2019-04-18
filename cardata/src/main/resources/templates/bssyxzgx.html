@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>保费贡献及收益比</title>
+<title>保司效益险种贡献</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
 	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
@@ -15,7 +15,7 @@
 	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
 <script>
 	function doSearch() {
-		$('#bfgxjsybAnalyseTable').datagrid('load', {
+		$('#bssyxzgxAnalyseTable').datagrid('load', {
 			year : $('#year').val()
 		});
 	}
@@ -24,23 +24,26 @@
 
 <body>
 	<div style="padding: 3px">
-		年份 <input id="year" style="line-height: 26px; border: 1px solid #ccc">
+		年份 <input id="year" size="10"/>
+		&#160;&#160;
+		月份 <input id="monthFrom" size="2"> 至 <input id="monthTo" size="2">
+		&#160;&#160;
 		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
 			onclick="doSearch()">查询</a>
 	</div>
 
-	<table id="bfgxjsybAnalyseTable" class="easyui-datagrid"
-		url="/bshzfx/bfgxjsybanalysequery" fitColumns="true"
+	<table id="bssyxzgxAnalyseTable" class="easyui-datagrid"
+		url="/bshzfx/bssyxzgxanalysequery" fitColumns="true"
 		singleSelect="true">
 		<thead>
 			<tr>
 				<th field="year" width="8%">时间(自然年)</th>
-				<th field="season" width="8%">季度</th>
+				<th field="month" width="8%">月份(月)</th>
 				<th field="bxgs" width="22%">保险公司</th>
-				<th field="xbbf" width="8%">新保保费(元)</th>
-				<th field="rbbf" width="8%">续保保费(元)</th>
-				<th field="xbzb" width="8%">新保占比(%)</th>
-				<th field="rbzb" width="8%">续保占比(%)</th>
+				<th field="cls" width="8%">投保车辆数（辆）</th>
+				<th field="syxzbf" width="8%">商业险总保费（元）</th>
+				<th field="syxdjbf" width="8%">商业险单均保费（元）</th>
+				<!--th field="rbzb" width="8%">续保占比(%)</th>
 				<th field="zbf" width="8%">总保费(元)</th>
 				<th field="zsy" width="8%">总收益</th>
 				<th field="sgccz" width="10%">事故车产值(元)</th>
@@ -49,7 +52,7 @@
 				<th field="jqxyjjsje" width="15%">交强险佣金结算金额(元)</th>
 				<th field="syxyjjsje" width="15%">商业险佣金结算金额(元)</th>
 				<th field="qtxjsr" width="12%">其他现金收入(元)</th>
-				<th field="tsb" width="8%">推送比(%)</th>
+				<th field="tsb" width="8%">推送比(%)</th-->
 			</tr>
 		</thead>
 	</table>

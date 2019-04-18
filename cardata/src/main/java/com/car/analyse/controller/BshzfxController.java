@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -20,14 +21,32 @@ public class BshzfxController {
 	private BshzfxService bshzfxService;
 	
 	@RequestMapping("/tobfgxjsybanalyse")
-	public String toQueryStaffUser() {
+	public String toBfgxjsybanalyse() {
 		return "bfgxjsybanalyse";
 	}
 	
 	@PostMapping(path="/bfgxjsybanalysequery")
 	@ResponseBody
-	public Object queryStaffUser() {
-		List<BfgxjsybAnalyseDTO> bfgxjsybAnalyseDTOs = bshzfxService.bfgxjsybAnalyse(2017, 1);
+	public Object queryBfgxjsybanalyser(@RequestParam(value = "year")Integer year) {
+		if(year == null) {
+			return null;
+		}
+		List<BfgxjsybAnalyseDTO> bfgxjsybAnalyseDTOs = bshzfxService.bfgxjsybAnalyseByYear(year);
+		return JSON.toJSON(bfgxjsybAnalyseDTOs);
+	}
+	
+	@RequestMapping("/tobssyxzgxanalyse")
+	public String toQueryStaffUser() {
+		return "bfgxjsybanalyse";
+	}
+	
+	@PostMapping(path="/bssyxzgxanalysequery")
+	@ResponseBody
+	public Object queryBssyxzgxanalyse(@RequestParam(value = "year")Integer year) {
+		if(year == null) {
+			return null;
+		}
+		List<BfgxjsybAnalyseDTO> bfgxjsybAnalyseDTOs = bshzfxService.bfgxjsybAnalyseByYear(year);
 		return JSON.toJSON(bfgxjsybAnalyseDTOs);
 	}
 }
