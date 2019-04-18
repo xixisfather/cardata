@@ -14,8 +14,15 @@
 		<result column="rbsgccz" jdbcType="DOUBLE" property="rbsgccz" />
 		<result column="syxzbf" jdbcType="DOUBLE" property="syxzbf" />
 		<result column="cls" jdbcType="INTEGER" property="cls" />
-		
 	</resultMap>
+	
+	<resultMap id="BaseBsxyszgxResultMap"
+		type="com.car.analyse.dto.BsxyszgxAnalyseDTO">
+		<result column="bxgs" jdbcType="VARCHAR" property="bxgs" />
+		<result column="syxzbf" jdbcType="DOUBLE" property="syxzbf" />
+		<result column="cls" jdbcType="INTEGER" property="cls" />
+	</resultMap>
+	
 	<select id="bfgxjsybAnalyseXbbf" resultMap="BaseResultMap">
 		select bxgs,sum(zfy)
 		as xbbf
@@ -127,7 +134,7 @@
 		group by a.bxgs
 	</select>
 
-	<select id="bsxyszgxAnalyseXb" resultMap="BaseResultMap">
+	<select id="bsxyszgxAnalyseXb" resultMap="BaseBsxyszgxResultMap">
 		select
 		bxgs,sum(syxbf)
 		as syxzbf,count(cjh) as cls from ${year}xbsj
@@ -140,15 +147,15 @@
 		group by
 		bxgs
 	</select>
-	<select id="bsxyszgxAnalyseRb" resultMap="BaseResultMap">
+	<select id="bsxyszgxAnalyseRb" resultMap="BaseBsxyszgxResultMap">
 		select
 		bxgs,sum(syxbf)
-		as syxzbf,count(cjh) as cls from ${year}xbsj
+		as syxzbf,count(cjh) as cls from ${year}rbsj
 		where bxgs
 		!='' and bxgs is
 		not
 		null
-		and chudrq &gt;=#{dateFrom} and chudrq &lt;=
+		and chudanrq &gt;=#{dateFrom} and chudanrq &lt;=
 		#{dateTo}
 		group by
 		bxgs

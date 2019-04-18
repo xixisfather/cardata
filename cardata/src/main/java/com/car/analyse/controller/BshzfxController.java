@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.car.analyse.dto.BfgxjsybAnalyseDTO;
+import com.car.analyse.dto.BsxyszgxAnalyseDTO;
 import com.car.analyse.service.BshzfxService;
 
 @Controller
@@ -37,16 +38,16 @@ public class BshzfxController {
 	
 	@RequestMapping("/tobssyxzgxanalyse")
 	public String toQueryStaffUser() {
-		return "bfgxjsybanalyse";
+		return "bssyxzgxanalyse";
 	}
 	
 	@PostMapping(path="/bssyxzgxanalysequery")
 	@ResponseBody
-	public Object queryBssyxzgxanalyse(@RequestParam(value = "year")Integer year) {
-		if(year == null) {
+	public Object queryBssyxzgxanalyse(@RequestParam(value = "year")Integer year,@RequestParam(value = "monthFrom")Integer monthFrom,@RequestParam(value = "monthTo")Integer monthTo) {
+		if(year == null||monthFrom == null || monthTo == null) {
 			return null;
 		}
-		List<BfgxjsybAnalyseDTO> bfgxjsybAnalyseDTOs = bshzfxService.bfgxjsybAnalyseByYear(year);
-		return JSON.toJSON(bfgxjsybAnalyseDTOs);
+		List<BsxyszgxAnalyseDTO> bsxyszgxAnalyseDTOs = bshzfxService.bsxyszgxAnalyseByMonthRegin(year, monthFrom, monthTo);
+		return JSON.toJSON(bsxyszgxAnalyseDTOs);
 	}
 }

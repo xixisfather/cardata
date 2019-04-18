@@ -129,6 +129,7 @@ public class BshzfxService {
 			Integer xbcls = xbclsMap.get(insuranceCompany) == null ? 0 : xbclsMap.get(insuranceCompany);
 			Integer rbcls = rbclsMap.get(insuranceCompany) == null ? 0 : rbclsMap.get(insuranceCompany);
 			BsxyszgxAnalyseDTO dto = new BsxyszgxAnalyseDTO();
+			dto.setYear(year);
 			dto.setBxgs(insuranceCompany);
 			dto.setMonth(month);
 			dto.setSyxzbf(ToolKits.add(xbsyx, rbsyx));

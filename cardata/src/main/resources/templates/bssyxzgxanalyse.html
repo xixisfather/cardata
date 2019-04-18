@@ -4,19 +4,20 @@
 <title>保司效益险种贡献</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
-	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
+	href="/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
-	href="../jquery-easyui-1.7.0/themes/icon.css">
+	href="/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" type="text/css"
-	href="../jquery-easyui-1.7.0/demo.css">
+	href="/jquery-easyui-1.7.0/demo/demo.css">
+<script type="text/javascript" src="/jquery-easyui-1.7.0/jquery.min.js"></script>
 <script type="text/javascript"
-	src="../jquery-easyui-1.7.0/jquery.min.js"></script>
-<script type="text/javascript"
-	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+	src="/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
 <script>
 	function doSearch() {
 		$('#bssyxzgxAnalyseTable').datagrid('load', {
-			year : $('#year').val()
+			year : $('#year').val(),
+			monthFrom : $('#monthFrom').val(),
+			monthTo : $('#monthTo').val()
 		});
 	}
 </script>
@@ -26,7 +27,7 @@
 	<div style="padding: 3px">
 		年份 <input id="year" size="10"/>
 		&#160;&#160;
-		月份 <input id="monthFrom" size="2"> 至 <input id="monthTo" size="2">
+		月份 <input id="monthFrom" size="5"> 至 <input id="monthTo" size="5">
 		&#160;&#160;
 		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
 			onclick="doSearch()">查询</a>
