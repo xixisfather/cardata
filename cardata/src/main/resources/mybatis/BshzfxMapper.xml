@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.analyse.mapper.BshzfxMapper">
+	<resultMap id="BaseResultMap"
+		type="com.car.analyse.dto.BfgxjsybAnalyseDTO">
+		<result column="bxgs" jdbcType="VARCHAR" property="bxgs" />
+		<result column="xbbf" jdbcType="DOUBLE" property="xbbf" />
+		<result column="rbbf" jdbcType="DOUBLE" property="rbbf" />
+		<result column="jqxyjjsje" jdbcType="DOUBLE"
+			property="jqxyjjsje" />
+		<result column="syxyjjsje" jdbcType="DOUBLE"
+			property="syxyjjsje" />
+		<result column="xbsgccz" jdbcType="DOUBLE" property="xbsgccz" />
+		<result column="rbsgccz" jdbcType="DOUBLE" property="rbsgccz" />
+	</resultMap>
+	<select id="bfgxjsybAnalyseXbbf" resultMap="BaseResultMap">
+		select bxgs,sum(zfy)
+		as xbbf
+		from ${year}xbsj where bxgs
+		!='' and
+		bxgs is not null
+		and qdrq
+		&gt;=#{dateFrom} and qdrq
+		&lt;=#{dateTo}
+		group by bxgs;
+	</select>
+	<select id="bfgxjsybAnalyseRbbf" resultMap="BaseResultMap">
+		select bxgs,sum(zfy)
+		as rbbf
+		from ${year}rbsj where bxgs
+		!='' and
+		bxgs is not null
+		and chudanrq
+		&gt;=#{dateFrom} and chudanrq
+		&lt;=#{dateTo}
+		group by bxgs;
+	</select>
+	<select id="bfgxjsybAnalyseXbjqxbf" resultMap="BaseResultMap">
+		select
+		bxgs,sum(jqxbf)
+		as jqxyjjsje
+		from ${year}xbsj where bxgs
+		!='' and
+		bxgs is
+		not null
+		and qdrq
+		&gt;=#{dateFrom} and qdrq
+		&lt;=#{dateTo}
+		group by bxgs;
+	</select>
+	<select id="bfgxjsybAnalyseRbjqxbf" resultMap="BaseResultMap">
+		select
+		bxgs,sum(jqxbf)
+		as jqxyjjsje
+		from ${year}rbsj where bxgs
+		!='' and
+		bxgs is
+		not null
+		and chudanrq
+		&gt;=#{dateFrom} and chudanrq
+		&lt;=#{dateTo}
+		group
+		by bxgs;
+	</select>
+	<select id="bfgxjsybAnalyseXbsyxbf" resultMap="BaseResultMap">
+		select
+		bxgs,sum(syxbf)
+		as syxyjjsje
+		from ${year}xbsj where bxgs
+		!='' and
+		bxgs is
+		not null
+		and qdrq
+		&gt;=#{dateFrom} and qdrq
+		&lt;=#{dateTo}
+		group by bxgs;
+	</select>
+	<select id="bfgxjsybAnalyseRbsyxbf" resultMap="BaseResultMap">
+		select
+		bxgs,sum(syxbf)
+		as syxyjjsje
+		from ${year}rbsj where bxgs
+		!='' and
+		bxgs is
+		not null
+		and chudanrq
+		&gt;=#{dateFrom} and chudanrq
+		&lt;=#{dateTo}
+		group
+		by bxgs;
+	</select>
+
+	<select id="bfgxjsybAnalyseXbsgccz" resultMap="BaseResultMap">
+		select
+		a.bxgs,sum(b.wxsrll) as xbsgccz from #{year}xbsj a
+		inner join
+		${year}shsj b
+		on a.cjh =
+		b.vin
+		where bxgs !=''
+		and bxgs is not null
+		and
+		b.jssj &lt;= a.zbsj
+		and b.jssj
+		&gt;= #{dateFrom}
+		and b.jssj &lt;=
+		#{dateTo}
+		group by a.bxgs
+
+	</select>
+	<select id="bfgxjsybAnalyseRbsgccz" resultMap="BaseResultMap">
+		select
+		a.bxgs,sum(b.wxsrll) as rbsgccz from #{year}xbsj a
+		inner join
+		${year}shsj b
+		on a.cjh = b.vin
+		where bxgs !=''
+		and bxgs is not null
+		and
+		b.jssj &lt;= a.zbsj
+		and b.jssj &gt;= #{dateFrom}
+		and b.jssj &lt;=
+		#{dateTo}
+		group by a.bxgs
+
+	</select>
+</mapper>

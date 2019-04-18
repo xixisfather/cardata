@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>保费贡献及收益比</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.7.0/demo.css">
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+</head>
+
+<body>
+	<table id="shsjAnalyseTable" class="easyui-datagrid"
+		url="/bshzfx/bfgxjsybanalysequery" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="year" width="8%">时间(自然年)</th>
+				<th field="season" width="8%">季度</th>
+				<th field="bxgs" width="22%">保险公司</th>
+				<th field="xbbf" width="8%">新保保费(元)</th>
+				<th field="rbbf" width="8%">续保保费(元)</th>
+				<th field="xbzb" width="8%">新保占比(%)</th>
+				<th field="rbzb" width="8%">续保占比(%)</th>
+				<th field="zbf" width="8%">总保费(元)</th>
+				<th field="zsy" width="8%">总收益</th>
+				<th field="sgccz" width="10%">事故车产值(元)</th>
+				<th field="xbsgccz" width="13%">新保-事故车产值(元)</th>
+				<th field="rbsgccz" width="13%">续保-事故车产值(元)</th>
+				<th field="jqxyjjsje" width="15%">交强险佣金结算金额(元)</th>
+				<th field="syxyjjsje" width="15%">商业险佣金结算金额(元)</th>
+				<th field="qtxjsr" width="12%">其他现金收入(元)</th>
+				<th field="tsb" width="8%">推送比(%)</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>
