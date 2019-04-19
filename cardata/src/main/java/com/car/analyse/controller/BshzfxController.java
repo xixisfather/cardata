@@ -28,7 +28,7 @@ public class BshzfxController {
 	
 	@PostMapping(path="/bfgxjsybanalysequery")
 	@ResponseBody
-	public Object queryBfgxjsybanalyser(@RequestParam(value = "year")Integer year) {
+	public Object queryBfgxjsybAnalyse(@RequestParam(value = "year")Integer year) {
 		if(year == null) {
 			return null;
 		}
@@ -37,17 +37,31 @@ public class BshzfxController {
 	}
 	
 	@RequestMapping("/tobssyxzgxanalyse")
-	public String toQueryStaffUser() {
+	public String toQueryBssyxzgxAnalyse() {
 		return "bssyxzgxanalyse";
 	}
 	
 	@PostMapping(path="/bssyxzgxanalysequery")
 	@ResponseBody
-	public Object queryBssyxzgxanalyse(@RequestParam(value = "year")Integer year,@RequestParam(value = "monthFrom")Integer monthFrom,@RequestParam(value = "monthTo")Integer monthTo) {
+	public Object queryBssyxzgxAnalyse(@RequestParam(value = "year")Integer year,@RequestParam(value = "monthFrom")Integer monthFrom,@RequestParam(value = "monthTo")Integer monthTo) {
 		if(year == null||monthFrom == null || monthTo == null) {
 			return null;
 		}
 		List<BsxyszgxAnalyseDTO> bsxyszgxAnalyseDTOs = bshzfxService.bsxyszgxAnalyseByMonthRegin(year, monthFrom, monthTo);
 		return JSON.toJSON(bsxyszgxAnalyseDTOs);
+	}
+	
+	@RequestMapping("/tobstsxmzlanalyse")
+	public String toBstsxmzlanalyse() {
+		return "bstsxmzlanalyse";
+	}
+	
+	@PostMapping(path="/bstsxmzlanalysequery")
+	@ResponseBody
+	public Object queryBstsxmzlAnalyse(@RequestParam(value = "year")Integer year,@RequestParam(value = "monthFrom")Integer monthFrom,@RequestParam(value = "monthTo")Integer monthTo) {
+		if(year == null||monthFrom == null || monthTo == null) {
+			return null;
+		}
+		return null;
 	}
 }

@@ -1,5 +1,10 @@
 package com.car.analyse.dto;
 
+/**
+ * 保司效益险种贡献
+ * @author chenchunrong
+ *
+ */
 public class BsxyszgxAnalyseDTO {
 	
 	private String bxgs;

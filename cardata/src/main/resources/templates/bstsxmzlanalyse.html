@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>保司效益险种贡献</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/demo/demo.css">
+<script type="text/javascript" src="/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script>
+	function doSearch() {
+		$('#bstsxmzlAnalyseTable').datagrid('load', {
+			year : $('#year').val(),
+			monthFrom : $('#monthFrom').val(),
+			monthTo : $('#monthTo').val()
+		});
+	}
+</script>
+</head>
+
+<body>
+	<div style="padding: 3px">
+		年份 <input id="year" size="10"/>
+		&#160;&#160;
+		月份 <input id="monthFrom" size="5"> 至 <input id="monthTo" size="5">
+		&#160;&#160;
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+			onclick="doSearch()">查询</a>
+	</div>
+
+	<table id="bstsxmzlAnalyseTable" class="easyui-datagrid"
+		url="/bshzfx/bstsxmzlanalysequery" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="year" width="10%" rowspan="2">时间(自然年)</th>
+				<th field="month" width="8%" rowspan="2">月份(月)</th>
+				<th field="bxgs" width="22%" rowspan="2" align="center">保险公司</th>
+				<th colspan="2" align="center">投保数</th>
+				<th colspan="5" align="center">保司推送数</th>
+				<th colspan="5" align="center">留修</th>
+			</tr>
+			<tr>	
+				<th field="zbf" width="10%">总保费（元）</th>
+				<th field="tbcls" width="10%">投保车辆数</th>
+				<th field="tsfxcls" width="8%">返修车辆数</th>
+				<th field="tssxcls" width="8%">送修车辆数</th>
+				<th field="tsfxzb" width="8%">返修占比</th>
+				<th field="tssxzb" width="10%">送修占比</th>
+				<th field="tszcls" width="13%">推送总车辆数</th>
+				<th field="lxsgccz" width="13%">事故车产值（元）</th>
+				<th field="lxfxcls" width="15%">返修车辆数</th>
+				<th field="lxfxcz" width="15%">返修产值（元）</th>
+				<th field="lxsxcls" width="12%">送修车辆数</th>
+				<th field="lxsxcz" width="1%">送修产值（元）</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>

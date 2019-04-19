@@ -1,5 +1,10 @@
 package com.car.analyse.dto;
 
+/**
+ * 保费贡献及收益比
+ * @author chenchunrong
+ *
+ */
 public class BfgxjsybAnalyseDTO {
 
 	private Integer year;
