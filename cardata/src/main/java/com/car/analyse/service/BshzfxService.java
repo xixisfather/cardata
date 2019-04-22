@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.car.analyse.dto.BfgxjsybAnalyseDTO;
+import com.car.analyse.dto.BstsxmzlAnalyseDTO;
 import com.car.analyse.dto.BsxyszgxAnalyseDTO;
 import com.car.analyse.mapper.BaseMapper;
 import com.car.analyse.mapper.BshzfxMapper;
@@ -146,5 +147,70 @@ public class BshzfxService {
 			bsxyszgxAnalyseDTOs.addAll(this.bsxyszgxAnalyseByMonth(year, month));
 		}
 		return bsxyszgxAnalyseDTOs;
+	}
+
+	private List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseByMonth(int year, int month) {
+		List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseDTOs = new ArrayList<BstsxmzlAnalyseDTO>();
+
+		String dateFrom = year + Constants.buildMonthMap().get(month).split(",")[0];
+		String dateTo = year + Constants.buildMonthMap().get(month).split(",")[1];
+		List<BstsxmzlAnalyseDTO> xbs = bshzfxMapper.bstsxmzlAnalyseXb(year, dateFrom, dateTo);
+		List<BstsxmzlAnalyseDTO> rbs = bshzfxMapper.bstsxmzlAnalyseRb(year, dateFrom, dateTo);
+		List<BstsxmzlAnalyseDTO> lxxbfxs = bshzfxMapper.bstsxmzlAnalyseXbfx(year, dateFrom, dateTo);
+		List<BstsxmzlAnalyseDTO> lxrbfxs = bshzfxMapper.bstsxmzlAnalyseRbfx(year, dateFrom, dateTo);
+		
+
+		Map<String, Double> xbZbfMap = xbs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getZbf));
+		Map<String, Double> rbZbfMap = rbs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getZbf));
+
+		Map<String, Integer> xbTbclsMap = xbs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getTbcls));
+		Map<String, Integer> rbTbclsMap = rbs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getTbcls));
+		
+		Map<String, Double> lxxbfxczMap = lxxbfxs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getLxfxcz));
+		Map<String, Double> lxrbfxczMap = lxrbfxs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getLxfxcz));
+
+		Map<String, Integer> lxxbfxclsMap = lxxbfxs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getLxfxcls));
+		Map<String, Integer> lxrbfxclsMap = lxrbfxs.stream()
+				.collect(Collectors.toMap(BstsxmzlAnalyseDTO::getBxgs, BstsxmzlAnalyseDTO::getLxfxcls));
+		
+		
+
+		List<String> insuranceCompanyList = baseMapper.findAllInsuranceCompany(year);
+		for (String insuranceCompany : insuranceCompanyList) {
+			BstsxmzlAnalyseDTO dto = new BstsxmzlAnalyseDTO();
+			Double xbZbf = xbZbfMap.get(insuranceCompany) == null ? 0 : xbZbfMap.get(insuranceCompany);
+			Double rbZbf = rbZbfMap.get(insuranceCompany) == null ? 0 : rbZbfMap.get(insuranceCompany);
+			Integer xbTbcls = xbTbclsMap.get(insuranceCompany) == null ? 0 : xbTbclsMap.get(insuranceCompany);
+			Integer rbTbcls = rbTbclsMap.get(insuranceCompany) == null ? 0 : rbTbclsMap.get(insuranceCompany);
+			Double lxxbfxcz = lxxbfxczMap.get(insuranceCompany) == null ? 0 : lxxbfxczMap.get(insuranceCompany);
+			Double lxrbfzcz = lxrbfxczMap.get(insuranceCompany) == null ? 0 : lxrbfxczMap.get(insuranceCompany);
+			Integer lxxbfxcls = lxxbfxclsMap.get(insuranceCompany) == null ? 0 :lxxbfxclsMap.get(insuranceCompany);
+			Integer lxrbfxcls = lxrbfxclsMap.get(insuranceCompany) == null ? 0 :lxrbfxclsMap.get(insuranceCompany);
+			
+			dto.setYear(year);
+			dto.setMonth(month);
+			dto.setBxgs(insuranceCompany);
+			dto.setZbf(ToolKits.add(xbZbf, rbZbf));
+			dto.setTbcls(xbTbcls + rbTbcls);
+			dto.setLxfxcz(ToolKits.add(lxxbfxcz, lxrbfzcz));
+			dto.setLxfxcls(lxxbfxcls + lxrbfxcls);
+			bstsxmzlAnalyseDTOs.add(dto);
+		}
+		return bstsxmzlAnalyseDTOs;
+	}
+
+	public List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseByMonthRegin(int year, int monthFrom, int monthTo) {
+		List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseDTOs = new ArrayList<BstsxmzlAnalyseDTO>();
+		for (int month = monthFrom; month <= monthTo; month++) {
+			bstsxmzlAnalyseDTOs.addAll(bstsxmzlAnalyseByMonth(year,month));
+		}
+		return bstsxmzlAnalyseDTOs;
 	}
 }

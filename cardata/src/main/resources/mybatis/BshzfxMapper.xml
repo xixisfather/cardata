@@ -15,14 +15,25 @@
 		<result column="syxzbf" jdbcType="DOUBLE" property="syxzbf" />
 		<result column="cls" jdbcType="INTEGER" property="cls" />
 	</resultMap>
-	
+
 	<resultMap id="BaseBsxyszgxResultMap"
 		type="com.car.analyse.dto.BsxyszgxAnalyseDTO">
 		<result column="bxgs" jdbcType="VARCHAR" property="bxgs" />
 		<result column="syxzbf" jdbcType="DOUBLE" property="syxzbf" />
 		<result column="cls" jdbcType="INTEGER" property="cls" />
 	</resultMap>
-	
+
+	<resultMap id="BstsxmzlResultMap"
+		type="com.car.analyse.dto.BstsxmzlAnalyseDTO">
+		<result column="bxgs" jdbcType="VARCHAR" property="bxgs" />
+		<result column="zbf" jdbcType="DOUBLE" property="zbf" />
+		<result column="tbcls" jdbcType="INTEGER" property="tbcls" />
+		<result column="lxfxcls" jdbcType="INTEGER" property="lxfxcls" />
+		<result column="lxfxcz" jdbcType="DOUBLE" property="lxfxcz" />
+		<result column="lxsxcls" jdbcType="INTEGER" property="lxsxcls" />
+		<result column="lxsxcz" jdbcType="DOUBLE" property="lxsxcz" />
+	</resultMap>
+
 	<select id="bfgxjsybAnalyseXbbf" resultMap="BaseResultMap">
 		select bxgs,sum(zfy)
 		as xbbf
@@ -116,8 +127,8 @@
 		and b.jssj &lt;=
 		#{dateTo}
 		group by a.bxgs
-
 	</select>
+
 	<select id="bfgxjsybAnalyseRbsgccz" resultMap="BaseResultMap">
 		select
 		a.bxgs,sum(b.wxsrll) as rbsgccz from #{year}xbsj a
@@ -157,8 +168,89 @@
 		null
 		and chudanrq &gt;=#{dateFrom} and chudanrq &lt;=
 		#{dateTo}
-		group by
+		group
+		by
 		bxgs
 	</select>
 
+	<select id="bstsxmzlAnalyseXb" resultMap="BstsxmzlResultMap">
+		select bxgs,sum(zfy) as
+		zbf,count(cjh) as tbcls
+		from ${year}xbsj where bxgs
+		!='' and
+		bxgs is not
+		null
+		and qdrq
+		&gt;=#{dateFrom} and qdrq
+		&lt;=#{dateTo}
+		group by bxgs;
+	</select>
+
+	<select id="bstsxmzlAnalyseRb" resultMap="BstsxmzlResultMap">
+		select bxgs,sum(zfy) as
+		zbf,count(cjh) as tbcls
+		from ${year}rbsj where bxgs
+		!='' and
+		bxgs is not
+		null
+		and chudanrq
+		&gt;=#{dateFrom} and chudanrq
+		&lt;=#{dateTo}
+		group by
+		bxgs;
+	</select>
+
+	<select id="bstsxmzlAnalyseXbfx" resultMap="BstsxmzlResultMap">
+		select
+		a.bxgs,sum(b.wxsrll) as lxfxcz,count(a.cjh) as lxfxcls from
+		#{year}xbsj a
+		inner join
+		${year}shsj b
+		on a.cjh =
+		b.vin
+		where bxgs !=''
+		and
+		bxgs is not null
+		and
+		b.jssj &lt;= a.zbsj
+		and b.jssj
+		&gt;= #{dateFrom}
+		and
+		b.jssj &lt;=
+		#{dateTo}
+		group by a.bxgs
+	</select>
+
+	<select id="bstsxmzlAnalyseRbfx" resultMap="BstsxmzlResultMap">
+		select
+		a.bxgs,sum(b.wxsrll) as lxfxcz,count(a.cjh) as lxfxcls from
+		#{year}rbsj a
+		inner join
+		${year}shsj b
+		on a.cjh =
+		b.vin
+		where bxgs !=''
+		and
+		bxgs is not null
+		and
+		b.jssj &lt;= a.zbsj
+		and b.jssj
+		&gt;= #{dateFrom}
+		and
+		b.jssj &lt;=
+		#{dateTo}
+		group by a.bxgs
+	</select>
+
+	<select id="bstsxmzlAnalyseSx" resultMap="BstsxmzlResultMap">
+		select
+		bxgsmc,sum(wxsrll) as sxfxcz,count(vin) as sxfxcls from 2017shsj
+		where
+		bxgsmc is not null
+		and bxgsmc !=''
+		and vin not in (select cjh from 2017xbsj)
+		and vin not in (select cjh from 2017rbsj)
+		and jssj &gt;= #{dateFrom} and jssj &lt;=#{dateTo}
+		group by bxgsmc
+	</select>
 </mapper>

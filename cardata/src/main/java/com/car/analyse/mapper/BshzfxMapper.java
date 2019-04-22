@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.car.analyse.dto.BfgxjsybAnalyseDTO;
+import com.car.analyse.dto.BstsxmzlAnalyseDTO;
 import com.car.analyse.dto.BsxyszgxAnalyseDTO;
 
 public interface BshzfxMapper {
@@ -28,5 +29,14 @@ public interface BshzfxMapper {
 	
 	List<BsxyszgxAnalyseDTO> bsxyszgxAnalyseRb(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
-
+	List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseXb(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseRb(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseXbfx(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseRbfx(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseSx(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
 }

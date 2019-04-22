@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.car.analyse.dto.BfgxjsybAnalyseDTO;
+import com.car.analyse.dto.BstsxmzlAnalyseDTO;
 import com.car.analyse.dto.BsxyszgxAnalyseDTO;
 import com.car.analyse.service.BshzfxService;
 
@@ -62,6 +63,7 @@ public class BshzfxController {
 		if(year == null||monthFrom == null || monthTo == null) {
 			return null;
 		}
-		return null;
+		List<BstsxmzlAnalyseDTO> bstsxmzlAnalyseDTOs = bshzfxService.bstsxmzlAnalyseByMonthRegin(year, monthFrom, monthTo);
+		return JSON.toJSON(bstsxmzlAnalyseDTOs);
 	}
 }
