@@ -12,6 +12,8 @@ public class BxhcgxAnalyseDTO {
 	
 	private Integer hccls;
 	
+	private Double hczb;
+	
 	private Integer bzxcls;
 	
 	private Double bzxzb;
@@ -54,6 +56,14 @@ public class BxhcgxAnalyseDTO {
 
 	public Integer getHccls() {
 		return hccls;
+	}
+
+	public Double getHczb() {
+		return hczb;
+	}
+
+	public void setHczb(Double hczb) {
+		this.hczb = hczb;
 	}
 
 	public void setHccls(Integer hccls) {

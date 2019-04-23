@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.car.analyse.mapper.BshzfxMapper">
+<mapper namespace="com.car.analyse.mapper.BxgxfxMapper">
 	<resultMap id="BaseResultMap"
-		type="com.car.analyse.dto.BfgxjsybAnalyseDTO">
+		type="com.car.analyse.dto.BxhcgxAnalyseDTO">
 		<result column="cbfs" jdbcType="VARCHAR" property="cbfs" />
 		<result column="cls" jdbcType="INTEGER" property="cls" />
 		<result column="zxcls" jdbcType="INTEGER" property="zxcls" />
 		<result column="zxzb" jdbcType="DOUBLE" property="zxzb" />
 		<result column="hccls" jdbcType="INTEGER" property="hccls" />
+		<result column="hczb" jdbcType="DOUBLE" property="hczb" />
 		<result column="bzxcls" jdbcType="INTEGER" property="bzxcls" />
 		<result column="bzxzb" jdbcType="DOUBLE" property="bzxzb" />
 		<result column="whccls" jdbcType="INTEGER" property="whccls" />
@@ -16,71 +17,101 @@
 
 	<select id="bxhcgxAnalyseXb" resultMap="BaseResultMap">
 		select
-		'${year}新保',cls,zxcls,hccls,bzxcls,(cls-hccls) as
-		whccls,FORMAT(zxcls/cls,2)*100 as
-		zxzb,FORMAT(cls/cls,2)*100 as
-		zxzb,FORMAT(zxcls/cls,2)*100 as zxzb,FORMAT(whccls/cls,2)*100 as whczb
+		'${year}新保' as
+		cbfs,cls,zxcls,hccls,bzxcls,(cls-hccls) as
+		whccls,convert(zxcls/cls*100,decimal(10,2)) as
+		zxzb,convert(zxcls/cls*100,decimal(10,2)) as
+		zxzb,convert(hccls/cls*100,decimal(10,2)) as
+		hczb,convert(bzxcls/cls*100,decimal(10,2)) as
+		bzxzb,convert((cls-hccls)*100/cls,decimal(10,2)) as whczb
+		from
+		(select
 		(
-		select count(distinct cjh) from
+		select
+		count(distinct cjh)
+		from
 		#{year}xbsj
 		) as cls,
 		(
 		select
-		count(distinct cjh) from #{year}xbsj a
+		count(distinct cjh)
+		from #{year}xbsj a
 		inner join #{year}shsj b on
-		a.cjh =
+		a.cjh
+		=
 		b.vin
-		where b.wxsrll > 0
+		where
+		b.wxsrll > 0
 		) as zxcls,
 		(
 		select count(distinct cjh)
-		from #{year}xbsj a inner join#{year}shsj b
+		from
+		#{year}xbsj a
+		inner join #{year}shsj b
 		on a.cjh =
 		b.vin
 		) as hccls,
 		(
-		select count(distinct cjh) from #{year}xbsj
+		select
+		count(distinct cjh) from #{year}xbsj
 		a inner join #{year}shsj
 		b
-		on a.cjh =
+		on
+		a.cjh
+		=
 		b.vin
 		where b.wxsrll = 0
 		) as bzxcls
-
+		) t
 	</select>
 
 	<select id="bxhcgxAnalyseRb" resultMap="BaseResultMap">
 		select
-		'${year}续保',cls,zxcls,hccls,bzxcls,(cls-hccls) as
-		whccls,FORMAT(zxcls/cls,2)*100 as
-		zxzb,FORMAT(cls/cls,2)*100 as
-		zxzb,FORMAT(zxcls/cls,2)*100 as zxzb,FORMAT(whccls/cls,2)*100 as whczb
+		'${year}续保' as
+		cbfs,cls,zxcls,hccls,bzxcls,(cls-hccls) as
+		whccls,convert(zxcls/cls*100,decimal(10,2)) as
+		zxzb,convert(hccls/cls*100,decimal(10,2)) as
+		hczb,convert(bzxcls/cls*100,decimal(10,2)) as
+		bzxzb,convert(zxcls/cls*100,decimal(10,2)) as
+		zxzb,convert((cls-hccls)/cls*100,decimal(10,2)) as whczb
+		from
+		(select
 		(
-		select count(distinct cjh) from
+		select
+		count(distinct cjh) from
 		#{year}rbsj
 		) as cls,
 		(
 		select
-		count(distinct cjh) from #{year}rbsj a
+		count(distinct cjh)
+		from #{year}rbsj a
 		inner join #{year}shsj b on
-		a.cjh =
+		a.cjh
+		=
 		b.vin
-		where b.wxsrll > 0
+		where
+		b.wxsrll > 0
 		) as zxcls,
 		(
 		select count(distinct cjh)
-		from #{year}rbsj a inner join#{year}shsj b
+		from
+		#{year}rbsj a
+		inner join #{year}shsj b
 		on a.cjh =
 		b.vin
 		) as hccls,
 		(
-		select count(distinct cjh) from #{year}rbsj
+		select
+		count(distinct cjh) from #{year}rbsj
 		a inner join #{year}shsj
 		b
-		on a.cjh =
+		on
+		a.cjh
+		=
 		b.vin
 		where b.wxsrll = 0
 		) as bzxcls
+		) t
 	</select>
 
 </mapper>
