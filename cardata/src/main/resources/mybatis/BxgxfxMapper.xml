@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.analyse.mapper.BshzfxMapper">
+	<resultMap id="BaseResultMap"
+		type="com.car.analyse.dto.BfgxjsybAnalyseDTO">
+		<result column="cbfs" jdbcType="VARCHAR" property="cbfs" />
+		<result column="cls" jdbcType="INTEGER" property="cls" />
+		<result column="zxcls" jdbcType="INTEGER" property="zxcls" />
+		<result column="zxzb" jdbcType="DOUBLE" property="zxzb" />
+		<result column="hccls" jdbcType="INTEGER" property="hccls" />
+		<result column="bzxcls" jdbcType="INTEGER" property="bzxcls" />
+		<result column="bzxzb" jdbcType="DOUBLE" property="bzxzb" />
+		<result column="whccls" jdbcType="INTEGER" property="whccls" />
+		<result column="whczb" jdbcType="DOUBLE" property="whczb" />
+	</resultMap>
+
+	<select id="bxhcgxAnalyseXb" resultMap="BaseResultMap">
+		select
+		'${year}新保',cls,zxcls,hccls,bzxcls,(cls-hccls) as
+		whccls,FORMAT(zxcls/cls,2)*100 as
+		zxzb,FORMAT(cls/cls,2)*100 as
+		zxzb,FORMAT(zxcls/cls,2)*100 as zxzb,FORMAT(whccls/cls,2)*100 as whczb
+		(
+		select count(distinct cjh) from
+		#{year}xbsj
+		) as cls,
+		(
+		select
+		count(distinct cjh) from #{year}xbsj a
+		inner join #{year}shsj b on
+		a.cjh =
+		b.vin
+		where b.wxsrll > 0
+		) as zxcls,
+		(
+		select count(distinct cjh)
+		from #{year}xbsj a inner join#{year}shsj b
+		on a.cjh =
+		b.vin
+		) as hccls,
+		(
+		select count(distinct cjh) from #{year}xbsj
+		a inner join #{year}shsj
+		b
+		on a.cjh =
+		b.vin
+		where b.wxsrll = 0
+		) as bzxcls
+
+	</select>
+
+	<select id="bxhcgxAnalyseRb" resultMap="BaseResultMap">
+		select
+		'${year}续保',cls,zxcls,hccls,bzxcls,(cls-hccls) as
+		whccls,FORMAT(zxcls/cls,2)*100 as
+		zxzb,FORMAT(cls/cls,2)*100 as
+		zxzb,FORMAT(zxcls/cls,2)*100 as zxzb,FORMAT(whccls/cls,2)*100 as whczb
+		(
+		select count(distinct cjh) from
+		#{year}rbsj
+		) as cls,
+		(
+		select
+		count(distinct cjh) from #{year}rbsj a
+		inner join #{year}shsj b on
+		a.cjh =
+		b.vin
+		where b.wxsrll > 0
+		) as zxcls,
+		(
+		select count(distinct cjh)
+		from #{year}rbsj a inner join#{year}shsj b
+		on a.cjh =
+		b.vin
+		) as hccls,
+		(
+		select count(distinct cjh) from #{year}rbsj
+		a inner join #{year}shsj
+		b
+		on a.cjh =
+		b.vin
+		where b.wxsrll = 0
+		) as bzxcls
+	</select>
+
+</mapper>

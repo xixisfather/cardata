@@ -30,13 +30,13 @@ $(function() {
 				"iconCls" : "icon-edit",
 				children : [
 						{
-							text : "保险对回厂贡献",
+							text : "保险回厂贡献",
 							attributes : {
-								url : '<iframe width="100%" height="100%" frameborder="0"  src="/shsjanalyse/toshsjanalyse" style="width:100%;height:100%;margin:0px 0px;"></iframe>'
+								url : '<iframe width="100%" height="100%" frameborder="0"  src="/bxgxfx/tobxhcgxanalyse" style="width:100%;height:100%;margin:0px 0px;"></iframe>'
 							}
 						},
 						{
-							text : "保险对回厂频次贡献",
+							text : "保险回厂频次贡献",
 							attributes : {
 								url : '<iframe width="100%" height="100%" frameborder="0"  src="/shsjanalyse/toshsjanalyse" style="width:100%;height:100%;margin:0px 0px;"></iframe>'
 							}
