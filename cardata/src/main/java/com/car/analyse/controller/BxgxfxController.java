@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.car.analyse.dto.BxhcgxAnalyseDTO;
+import com.car.analyse.dto.BxhcpcgxAnalyseDTO;
 import com.car.analyse.service.BxgxfxService;
 
 @Controller
@@ -21,17 +22,32 @@ public class BxgxfxController {
 	private BxgxfxService bxgxfxService;
 	
 	@RequestMapping("/tobxhcgxanalyse")
-	public String toBfgxjsybanalyse() {
+	public String toBxhcgxAnalyse() {
 		return "bxhcgxanalyse";
 	}
 	
 	@PostMapping(path="/bxhcgxanalysequery")
 	@ResponseBody
-	public Object queryBfgxjsybAnalyse(@RequestParam(value = "year")Integer year) {
+	public Object queryBxhcgxAnalyse(@RequestParam(value = "year")Integer year) {
 		if(year == null) {
 			return null;
 		}
 		List<BxhcgxAnalyseDTO> bxhcgxAnalyseDTODTOs = bxgxfxService.bxhcgxAnalyseByYear(year);
 		return JSON.toJSON(bxhcgxAnalyseDTODTOs);
+	}
+	
+	@RequestMapping("/tobxhcpcgxanalyse")
+	public String toBxhcpcgxAnalyse() {
+		return "bxhcgxanalyse";
+	}
+	
+	@PostMapping(path="/bxhcpcgxanalysequery")
+	@ResponseBody
+	public Object queryBxhcpcgxAnalyse(@RequestParam(value = "year")Integer year) {
+		if(year == null) {
+			return null;
+		}
+		List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseDTOs = bxgxfxService.bxhcpcgxAnalyseByYear(year);
+		return JSON.toJSON(bxhcpcgxAnalyseDTOs);
 	}
 }

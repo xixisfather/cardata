@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.car.analyse.mapper.BxgxfxMapper">
-	<resultMap id="BaseResultMap"
+	<resultMap id="BxhcgxBaseResultMap"
 		type="com.car.analyse.dto.BxhcgxAnalyseDTO">
 		<result column="cbfs" jdbcType="VARCHAR" property="cbfs" />
 		<result column="cls" jdbcType="INTEGER" property="cls" />
@@ -15,7 +15,21 @@
 		<result column="whczb" jdbcType="DOUBLE" property="whczb" />
 	</resultMap>
 
-	<select id="bxhcgxAnalyseXb" resultMap="BaseResultMap">
+	<resultMap id="BxhcpcgxBaseResultMap"
+		type="com.car.analyse.dto.BxhcpcgxAnalyseDTO">
+		<result column="zxkh" jdbcType="VARCHAR" property="zxkh" />
+		<result column="cls" jdbcType="INTEGER" property="cls" />
+		<result column="hcpcjz" jdbcType="DOUBLE" property="hcpcjz" />
+		<result column="hccls" jdbcType="INTEGER" property="hccls" />
+		<result column="hccls" jdbcType="INTEGER" property="hccls" />
+		<result column="jscls" jdbcType="INTEGER" property="jscls" />
+		<result column="jsclszb" jdbcType="DOUBLE" property="jsclszb" />
+		<result column="jscsjz" jdbcType="DOUBLE" property="jscsjz" />
+		<result column="jscz" jdbcType="DOUBLE" property="jscz" />
+		<result column="jsczzb" jdbcType="DOUBLE" property="jsczzb" />
+	</resultMap>
+
+	<select id="bxhcgxAnalyseXb" resultMap="BxhcgxBaseResultMap">
 		select
 		'${year}新保' as
 		cbfs,cls,zxcls,hccls,bzxcls,(cls-hccls) as
@@ -65,7 +79,7 @@
 		) t
 	</select>
 
-	<select id="bxhcgxAnalyseRb" resultMap="BaseResultMap">
+	<select id="bxhcgxAnalyseRb" resultMap="BxhcpcgxBaseResultMap">
 		select
 		'${year}续保' as
 		cbfs,cls,zxcls,hccls,bzxcls,(cls-hccls) as
@@ -112,6 +126,58 @@
 		where b.wxsrll = 0
 		) as bzxcls
 		) t
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxbzbCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select count(distinct vin) as cls from
+		(
+		select vin,jssj from
+		#{year}shsj group by vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		select cjh,zbsj from #{year-1}xbsj
+		union ALL
+		select cjh,zbsj from #{year}xbsj
+		union ALL
+		select cjh,zbsj from
+		#{year-1}rbsj
+		union ALL
+		select cjh,zbsj from #{year}rbsj
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj &lt; t1.jssj
+	</select>
+	
+	<select id="bxhcpcgxAnalyseZxbzbHcCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select count(vin) as hccls from
+		(
+		select vin,jssj from
+		#{year}shsj group by vin,DATE_FORMAT(jssj, '%Y-%m-%d')
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		select cjh,zbsj from #{year-1}xbsj
+		union ALL
+		select cjh,zbsj from #{year}xbsj
+		union ALL
+		select cjh,zbsj from
+		#{year-1}rbsj
+		union ALL
+		select cjh,zbsj from #{year}rbsj
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj &lt; t1.jssj
 	</select>
 
 </mapper>

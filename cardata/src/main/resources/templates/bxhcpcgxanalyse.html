@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>保险回厂贡献</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/demo/demo.css">
+<script type="text/javascript" src="/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script>
+	function doSearch() {
+		$('#bxhcgxAnalyseTable').datagrid('load', {
+			year : $('#year').val()
+		});
+	}
+</script>
+</head>
+
+<body>
+	<div style="padding: 3px">
+		年份 <input id="year" size="10"/>
+		&#160;&#160;
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+			onclick="doSearch()">查询</a>
+	</div>
+
+	<table id="bxhcgxAnalyseTable" class="easyui-datagrid"
+		url="/bxgxfx/bxhcgxanalysequery" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="cbfs" width="10%">承保方式</th>
+				<th field="cls" width="10%">车辆数（辆）</th>
+				<th field="zxcls" width="15%">在修车辆数（辆）</th>
+				<th field="zxzb" width="10%">在修占比（%）</th>
+				<th field="hccls" width="15%">回厂车辆数（辆）</th>
+				<th field="hczb" width="10%">回厂占比（%）</th>
+				<th field="bzxcls" width="15%">不在修车辆数（辆）</th>
+				<th field="bzxzb" width="10%">不在修占比（%）</th>
+				<th field="whccls" width="15%">未回厂车辆数（辆）</th>
+				<th field="whczb" width="10%">未回厂占比（%）</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>

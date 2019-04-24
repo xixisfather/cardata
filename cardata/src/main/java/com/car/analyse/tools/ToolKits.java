@@ -14,4 +14,5 @@ public class ToolKits {
 		}
 		return new BigDecimal(d1).divide(new BigDecimal(d2), 2, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
+	
 }
