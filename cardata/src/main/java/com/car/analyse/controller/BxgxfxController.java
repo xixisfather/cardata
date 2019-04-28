@@ -38,7 +38,7 @@ public class BxgxfxController {
 	
 	@RequestMapping("/tobxhcpcgxanalyse")
 	public String toBxhcpcgxAnalyse() {
-		return "bxhcgxanalyse";
+		return "bxhcpcgxanalyse";
 	}
 	
 	@PostMapping(path="/bxhcpcgxanalysequery")

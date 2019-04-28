@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>保险回厂贡献</title>
+<title>保险回厂频次贡献</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
 	href="/jquery-easyui-1.7.0/themes/default/easyui.css">
@@ -14,7 +14,7 @@
 	src="/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
 <script>
 	function doSearch() {
-		$('#bxhcgxAnalyseTable').datagrid('load', {
+		$('#bxhcpcgxAnalyseTable').datagrid('load', {
 			year : $('#year').val()
 		});
 	}
@@ -29,21 +29,20 @@
 			onclick="doSearch()">查询</a>
 	</div>
 
-	<table id="bxhcgxAnalyseTable" class="easyui-datagrid"
-		url="/bxgxfx/bxhcgxanalysequery" fitColumns="true"
+	<table id="bxhcpcgxAnalyseTable" class="easyui-datagrid"
+		url="/bxgxfx/bxhcpcgxanalysequery" fitColumns="true"
 		singleSelect="true">
 		<thead>
 			<tr>
-				<th field="cbfs" width="10%">承保方式</th>
+				<th field="zxkh" width="10%">在修客户</th>
 				<th field="cls" width="10%">车辆数（辆）</th>
-				<th field="zxcls" width="15%">在修车辆数（辆）</th>
-				<th field="zxzb" width="10%">在修占比（%）</th>
-				<th field="hccls" width="15%">回厂车辆数（辆）</th>
-				<th field="hczb" width="10%">回厂占比（%）</th>
-				<th field="bzxcls" width="15%">不在修车辆数（辆）</th>
-				<th field="bzxzb" width="10%">不在修占比（%）</th>
-				<th field="whccls" width="15%">未回厂车辆数（辆）</th>
-				<th field="whczb" width="10%">未回厂占比（%）</th>
+				<th field="hcpcjz" width="12%">回厂频次均值</th>
+				<th field="hccls" width="12%">回厂车辆数（辆）</th>
+				<th field="jscls" width="12%">结算车辆数（辆）</th>
+				<th field="jsclszb" width="15%">结算车辆数占比（%）</th>
+				<th field="jscsjz" width="12%">结算次数均值</th>
+				<th field="jscz" width="12%">结算产值</th>
+				<th field="jsczzb" width="12%">结算产值占比（%）</th>
 			</tr>
 		</thead>
 	</table>
