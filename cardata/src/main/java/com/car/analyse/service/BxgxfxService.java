@@ -52,7 +52,7 @@ public class BxgxfxService {
 		List<BxhcpcgxAnalyseDTO> zxbzbhcclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbHcCls(year);
 		List<BxhcpcgxAnalyseDTO> zxbzbjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbJsCls(year);
 		List<BxhcpcgxAnalyseDTO> zxbzbjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbJsCz(year);
-		List<BxhcpcgxAnalyseDTO> zxbzbjszczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbJsZcz(year);
+		List<BxhcpcgxAnalyseDTO> zczs = bxgxfxMapper.bxhcpcgxAnalyseZcz(year);
 		Integer zxbzbcls = zxbzbclss.get(0).getCls();
 		Integer zxbzbhccls = zxbzbhcclss.get(0).getHccls();
 		Double zxbzbhcpcjz = ToolKits.divid(zxbzbhccls, zxbzbcls);
@@ -60,8 +60,8 @@ public class BxgxfxService {
 		Double zxbzbjsclszb = ToolKits.divid(zxbzbjscls*100, zxbzbcls);
 		Double zxbzbjscsjz = ToolKits.divid(zxbzbjscls*100, zxbzbhccls);
 		Double zxbzbjscz = zxbzbjsczs.get(0).getJscz();
-		Double zxbzbjszcz = zxbzbjszczs.get(0).getJscz();
-		Double zxbzbjsczzb = ToolKits.divid(zxbzbjscz*100, zxbzbjszcz);
+		Double zcz = zczs.get(0).getJscz();
+		Double zxbzbjsczzb = ToolKits.divid(zxbzbjscz*100, zcz);
 		BxhcpcgxAnalyseDTO zxbzbDTO = new BxhcpcgxAnalyseDTO();
 		zxbzbDTO.setZxkh("在修不在保");
 		zxbzbDTO.setCls(zxbzbcls);
@@ -77,7 +77,6 @@ public class BxgxfxService {
 		List<BxhcpcgxAnalyseDTO> zxbzbgphcclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbGpHcCls(year,zxbzbhcpcjz);
 		List<BxhcpcgxAnalyseDTO> zxbzbgpjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbGpJsCls(year,zxbzbhcpcjz);
 		List<BxhcpcgxAnalyseDTO> zxbzbgpjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbGpJsCz(year,zxbzbhcpcjz);
-		List<BxhcpcgxAnalyseDTO> zxbzbgpjszczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbGpJsZcz(year,zxbzbhcpcjz);
 		Integer zxbzbgpcls = zxbzbgpclss.get(0).getCls();
 		Integer zxbzbgphccls = zxbzbgphcclss.get(0).getHccls();
 		Double zxbzbgphcpcjz = ToolKits.divid(zxbzbgphccls, zxbzbgpcls);
@@ -85,8 +84,7 @@ public class BxgxfxService {
 		Double zxbzbgpjsclszb = ToolKits.divid(zxbzbgpjscls*100, zxbzbgpcls);
 		Double zxbzbgpjscsjz = ToolKits.divid(zxbzbgpjscls*100, zxbzbgphccls);
 		Double zxbzbgpjscz = zxbzbgpjsczs.get(0).getJscz();
-		Double zxbzbgpjszcz = zxbzbgpjszczs.get(0).getJscz();
-		Double zxbzbgpjsczzb = ToolKits.divid(zxbzbgpjscz*100, zxbzbgpjszcz);
+		Double zxbzbgpjsczzb = ToolKits.divid(zxbzbgpjscz*100, zxbzbjscz);
 		BxhcpcgxAnalyseDTO zxbzbGpDTO = new BxhcpcgxAnalyseDTO();
 		zxbzbGpDTO.setZxkh("高频");
 		zxbzbGpDTO.setCls(zxbzbgpcls);
@@ -102,7 +100,6 @@ public class BxgxfxService {
 		List<BxhcpcgxAnalyseDTO> zxbzbdphcclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpHcCls(year,zxbzbhcpcjz);
 		List<BxhcpcgxAnalyseDTO> zxbzbdpjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsCls(year,zxbzbhcpcjz);
 		List<BxhcpcgxAnalyseDTO> zxbzbdpjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsCz(year,zxbzbhcpcjz);
-		List<BxhcpcgxAnalyseDTO> zxbzbdpjszczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsZcz(year,zxbzbhcpcjz);
 		Integer zxbzbdpcls = zxbzbdpclss.get(0).getCls();
 		Integer zxbzbdphccls = zxbzbdphcclss.get(0).getHccls();
 		Double zxbzbdphcpcjz = ToolKits.divid(zxbzbdphccls, zxbzbdpcls);
@@ -110,8 +107,7 @@ public class BxgxfxService {
 		Double zxbzbdpjsclszb = ToolKits.divid(zxbzbdpjscls*100, zxbzbdpcls);
 		Double zxbzbdpjscsjz = ToolKits.divid(zxbzbdpjscls*100, zxbzbdphccls);
 		Double zxbzbdpjscz = zxbzbdpjsczs.get(0).getJscz();
-		Double zxbzbdpjszcz = zxbzbdpjszczs.get(0).getJscz();
-		Double zxbzbdpjsczzb = ToolKits.divid(zxbzbdpjscz*100, zxbzbdpjszcz);
+		Double zxbzbdpjsczzb = ToolKits.divid(zxbzbdpjscz*100, zxbzbjscz);
 		BxhcpcgxAnalyseDTO zxbzbDpDTO = new BxhcpcgxAnalyseDTO();
 		zxbzbDpDTO.setZxkh("低频");
 		zxbzbDpDTO.setCls(zxbzbdpcls);
@@ -123,9 +119,82 @@ public class BxgxfxService {
 		zxbzbDpDTO.setJscz(zxbzbdpjscz);
 		zxbzbDpDTO.setJsczzb(zxbzbdpjsczzb);
 		
+		List<BxhcpcgxAnalyseDTO> zxzbclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbCls(year);
+		List<BxhcpcgxAnalyseDTO> zxzbhcclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbHcCls(year);
+		List<BxhcpcgxAnalyseDTO> zxzbjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbJsCls(year);
+		List<BxhcpcgxAnalyseDTO> zxzbjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxzbJsCz(year);
+		Integer zxzbcls = zxzbclss.get(0).getCls();
+		Integer zxzbhccls = zxzbhcclss.get(0).getHccls();
+		Double zxzbhcpcjz = ToolKits.divid(zxzbhccls, zxbzbcls);
+		Integer zxzbjscls = zxzbjsclss.get(0).getJscls();
+		Double zxzbjsclszb = ToolKits.divid(zxzbjscls*100, zxzbcls);
+		Double zxzbjscsjz = ToolKits.divid(zxzbjscls*100, zxzbhccls);
+		Double zxzbjscz = zxzbjsczs.get(0).getJscz();
+		Double zxzbjsczzb = ToolKits.divid(zxzbjscz*100, zcz);
+		BxhcpcgxAnalyseDTO zxzbDTO = new BxhcpcgxAnalyseDTO();
+		zxzbDTO.setZxkh("在修在保");
+		zxzbDTO.setCls(zxzbcls);
+		zxzbDTO.setHccls(zxzbhccls);
+		zxzbDTO.setHcpcjz(zxzbhcpcjz);
+		zxzbDTO.setJscls(zxzbjscls);
+		zxzbDTO.setJsclszb(zxzbjsclszb);
+		zxzbDTO.setJscsjz(zxzbjscsjz);
+		zxzbDTO.setJscz(zxzbjscz);
+		zxzbDTO.setJsczzb(zxzbjsczzb);
+		
+		List<BxhcpcgxAnalyseDTO> zxzbgpclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbGpCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbgphcclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbGpHcCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbgpjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbGpJsCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbgpjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxzbGpJsCz(year,zxzbhcpcjz);
+		Integer zxzbgpcls = zxzbgpclss.get(0).getCls();
+		Integer zxzbgphccls = zxzbgphcclss.get(0).getHccls();
+		Double zxzbgphcpcjz = ToolKits.divid(zxzbgphccls, zxzbgpcls);
+		Integer zxzbgpjscls = zxzbgpjsclss.get(0).getJscls();
+		Double zxzbgpjsclszb = ToolKits.divid(zxzbgpjscls*100, zxzbgpcls);
+		Double zxzbgpjscsjz = ToolKits.divid(zxzbgpjscls*100, zxzbgphccls);
+		Double zxzbgpjscz = zxzbgpjsczs.get(0).getJscz();
+		Double zxzbgpjsczzb = ToolKits.divid(zxzbgpjscz*100, zxzbjscz);
+		BxhcpcgxAnalyseDTO zxzbGpDTO = new BxhcpcgxAnalyseDTO();
+		zxzbGpDTO.setZxkh("高频");
+		zxzbGpDTO.setCls(zxzbgpcls);
+		zxzbGpDTO.setHccls(zxzbgphccls);
+		zxzbGpDTO.setHcpcjz(zxzbgphcpcjz);
+		zxzbGpDTO.setJscls(zxzbgpjscls);
+		zxzbGpDTO.setJsclszb(zxzbgpjsclszb);
+		zxzbGpDTO.setJscsjz(zxzbgpjscsjz);
+		zxzbGpDTO.setJscz(zxzbgpjscz);
+		zxzbGpDTO.setJsczzb(zxzbgpjsczzb);
+		
+		List<BxhcpcgxAnalyseDTO> zxzbdpclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbDpCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbdphcclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbDpHcCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbdpjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxzbDpJsCls(year,zxzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxzbdpjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxzbDpJsCz(year,zxzbhcpcjz);
+		Integer zxzbdpcls = zxzbdpclss.get(0).getCls();
+		Integer zxzbdphccls = zxzbdphcclss.get(0).getHccls();
+		Double zxzbdphcpcjz = ToolKits.divid(zxzbdphccls, zxzbdpcls);
+		Integer zxzbdpjscls = zxzbdpjsclss.get(0).getJscls();
+		Double zxzbdpjsclszb = ToolKits.divid(zxzbdpjscls*100, zxzbdpcls);
+		Double zxzbdpjscsjz = ToolKits.divid(zxzbdpjscls*100, zxzbdphccls);
+		Double zxzbdpjscz = zxzbdpjsczs.get(0).getJscz();
+		Double zxzbdpjsczzb = ToolKits.divid(zxzbdpjscz*100, zxzbjscz);
+		BxhcpcgxAnalyseDTO zxzbDpDTO = new BxhcpcgxAnalyseDTO();
+		zxzbDpDTO.setZxkh("低频");
+		zxzbDpDTO.setCls(zxzbdpcls);
+		zxzbDpDTO.setHccls(zxzbdphccls);
+		zxzbDpDTO.setHcpcjz(zxzbdphcpcjz);
+		zxzbDpDTO.setJscls(zxzbdpjscls);
+		zxzbDpDTO.setJsclszb(zxzbdpjsclszb);
+		zxzbDpDTO.setJscsjz(zxzbdpjscsjz);
+		zxzbDpDTO.setJscz(zxzbdpjscz);
+		zxzbDpDTO.setJsczzb(zxzbdpjsczzb);
+
+		
 		bxhcpcgxAnalyseDTOs.add(zxbzbDTO);
 		bxhcpcgxAnalyseDTOs.add(zxbzbGpDTO);
 		bxhcpcgxAnalyseDTOs.add(zxbzbDpDTO);
+		bxhcpcgxAnalyseDTOs.add(zxzbDTO);
+		bxhcpcgxAnalyseDTOs.add(zxzbGpDTO);
+		bxhcpcgxAnalyseDTOs.add(zxzbDpDTO);
 		return bxhcpcgxAnalyseDTOs;
 	}
 }

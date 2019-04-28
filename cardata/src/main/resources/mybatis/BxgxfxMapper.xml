@@ -168,7 +168,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -206,7 +207,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -244,13 +246,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin from
+		select vin
+		from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -284,13 +288,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin,wxsrll from
+		select
+		vin,wxsrll from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -303,12 +309,6 @@
 		) and
 		t5.wxsrll &gt;0
 		) t7
-	</select>
-
-	<select id="bxhcpcgxAnalyseZxbzbJsZcz"
-		resultMap="BxhcpcgxBaseResultMap">
-		select sum(wxsrll) jscz from
-		${year}shsj
 	</select>
 
 	<select id="bxhcpcgxAnalyseZxbzbGpCls"
@@ -332,7 +332,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -373,7 +374,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -415,13 +417,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin from
+		select vin
+		from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -460,13 +464,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin,wxsrll from
+		select
+		vin,wxsrll from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -483,16 +489,6 @@
 		) t8
 	</select>
 
-	<select id="bxhcpcgxAnalyseZxbzbGpJsZcz"
-		resultMap="BxhcpcgxBaseResultMap">
-		select sum(wxsrll) as jscz from
-		(
-		select sum(wxsrll) as wxsrll from
-		${year}shsj group by vin having
-		count(vin) >= ${gpcs}
-		) t1
-	</select>
-	
 	<select id="bxhcpcgxAnalyseZxbzbDpCls"
 		resultMap="BxhcpcgxBaseResultMap">
 		select sum(cls) as cls from
@@ -514,7 +510,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -555,7 +552,8 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
 
 		union
 		all
@@ -597,13 +595,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin from
+		select vin
+		from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -642,13 +642,15 @@
 		) t3
 		on t1.vin = t3.cjh
 		where t3.zbsj &lt;
-		t1.jssj and
+		DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
 		t1.wxsrll &gt;0
 
 		union
 		all
 
-		select vin,wxsrll from
+		select
+		vin,wxsrll from
 		(
 		<include refid="select_filter_vin_by_date" />
 		) t5
@@ -665,13 +667,331 @@
 		) t8
 	</select>
 
-	<select id="bxhcpcgxAnalyseZxbzbDpJsZcz"
+	<select id="bxhcpcgxAnalyseZxzbCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select count(distinct vin) as cls from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbHcCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select count(vin) as hccls from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbJsCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select count(vin) as jscls from
+		(
+		<include refid="select_filter_vin_by_date" />
+		)
+		t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		<include refid="select_all_cjh" />
+		)
+		t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		&gt;DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+		and
+		t1.wxsrll &gt; 0
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbJsCz"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum( wxsrll) as jscz from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbGpCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(cls) as cls from
+		(
+		select count(distinct vin) as cls from
+		(
+		select vin from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+		) t4 group by t4.vin having
+		count(t4.vin) >= ${gpcs}
+		) t5
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbGpHcCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(hccls) as hccls from
+		(
+		select count(vin) as hccls from
+		(
+		select vin from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+		) t4 group by t4.vin having
+		count(t4.vin) >= ${gpcs}
+		) t5
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbGpJsCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(jscls) as jscls from
+		(
+		select count(vin) as jscls from
+		(
+		select vin
+		from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
+		t1.wxsrll &gt;0
+		) t4 group by
+		t4.vin having count(t4.vin) >=
+		${gpcs}
+		) t8
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbGpJsCz"
 		resultMap="BxhcpcgxBaseResultMap">
 		select sum(wxsrll) as jscz from
 		(
-		select sum(wxsrll) as wxsrll from
-		${year}shsj group by vin having
-		count(vin) &lt; ${dpcs}
+		select wxsrll from
+		(
+		select vin,wxsrll
+		from
+		(
+		<include refid="select_filter_vin_by_date" />
 		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
+		t1.wxsrll &gt;0
+		) t4 group by
+		t4.vin having count(t4.vin) >=
+		${gpcs}
+		) t5
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbDpCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(cls) as cls from
+		(
+		select count(distinct vin) as cls from
+		(
+		select vin from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+		) t4 group by t4.vin having
+		count(t4.vin) &lt; ${dpcs}
+		) t5
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbDpHcCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(hccls) as hccls from
+		(
+		select count(vin) as hccls from
+		(
+		select vin from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d')
+		) t4 group by t4.vin having
+		count(t4.vin) &lt; ${dpcs}
+		) t5
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbDpJsCls"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(jscls) as jscls from
+		(
+		select count(vin) as jscls from
+		(
+		select vin
+		from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
+		t1.wxsrll &gt;0
+		) t4 group by
+		t4.vin having count(t4.vin) &lt;
+		${dpcs}
+		) t8
+	</select>
+
+	<select id="bxhcpcgxAnalyseZxzbDpJsCz"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(wxsrll) as jscz from
+		(
+		select wxsrll from
+		(
+		select vin,wxsrll
+		from
+		(
+		<include refid="select_filter_vin_by_date" />
+		) t1
+		inner join
+		(
+		select cjh,max(zbsj) as
+		zbsj from
+		(
+		<include refid="select_all_cjh" />
+		) t2
+		group by cjh
+		) t3
+		on t1.vin = t3.cjh
+		where t3.zbsj
+		>=DATE_FORMAT(t1.jssj,
+		'%Y-%m-%d') and
+		t1.wxsrll &gt;0
+		) t4 group by
+		t4.vin having count(t4.vin) &lt;
+		${dpcs}
+		) t5
+	</select>
+
+
+	<select id="bxhcpcgxAnalyseZcz"
+		resultMap="BxhcpcgxBaseResultMap">
+		select sum(wxsrll) as jscz
+		from
+		${year}shsj
 	</select>
 </mapper>
