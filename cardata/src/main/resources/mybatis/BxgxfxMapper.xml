@@ -395,7 +395,7 @@
 
 	<select id="bxhcpcgxAnalyseZxbzbGpJsCls"
 		resultMap="BxhcpcgxBaseResultMap">
-		select sum(jscls) as jccls
+		select sum(jscls) as jscls from
 		(
 		select count(vin) as jscls from
 		(
@@ -485,9 +485,9 @@
 
 	<select id="bxhcpcgxAnalyseZxbzbGpJsZcz"
 		resultMap="BxhcpcgxBaseResultMap">
-		select sum(wxsrll) jscz from
+		select sum(wxsrll) as jscz from
 		(
-		select sum(wxsrll) jscz from
+		select sum(wxsrll) as wxsrll from
 		${year}shsj group by vin having
 		count(vin) > ${gpcs}
 		) t1
