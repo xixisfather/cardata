@@ -32,4 +32,24 @@ public interface BxgxfxMapper {
 	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbGpJsCz(@Param("year") int year,@Param("gpcs") double gpcs);
 	
 	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbGpJsZcz(@Param("year") int year,@Param("gpcs") double gpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbDpCls(@Param("year") int year,@Param("dpcs") double dpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbDpHcCls(@Param("year") int year,@Param("dpcs") double dpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbDpJsCls(@Param("year") int year,@Param("dpcs") double dpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbDpJsCz(@Param("year") int year,@Param("dpcs") double dpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxbzbDpJsZcz(@Param("year") int year,@Param("dpcs") double dpcs);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbCls(@Param("year") int year);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbHcCls(@Param("year") int year);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbJsCls(@Param("year") int year);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbJsCz(@Param("year") int year);
+	
+	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbJsZcz(@Param("year") int year);
 }

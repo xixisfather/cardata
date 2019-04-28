@@ -62,7 +62,6 @@ public class BxgxfxService {
 		Double zxbzbjscz = zxbzbjsczs.get(0).getJscz();
 		Double zxbzbjszcz = zxbzbjszczs.get(0).getJscz();
 		Double zxbzbjsczzb = ToolKits.divid(zxbzbjscz*100, zxbzbjszcz);
-		
 		BxhcpcgxAnalyseDTO zxbzbDTO = new BxhcpcgxAnalyseDTO();
 		zxbzbDTO.setZxkh("在修不在保");
 		zxbzbDTO.setCls(zxbzbcls);
@@ -88,7 +87,6 @@ public class BxgxfxService {
 		Double zxbzbgpjscz = zxbzbgpjsczs.get(0).getJscz();
 		Double zxbzbgpjszcz = zxbzbgpjszczs.get(0).getJscz();
 		Double zxbzbgpjsczzb = ToolKits.divid(zxbzbgpjscz*100, zxbzbgpjszcz);
-		
 		BxhcpcgxAnalyseDTO zxbzbGpDTO = new BxhcpcgxAnalyseDTO();
 		zxbzbGpDTO.setZxkh("高频");
 		zxbzbGpDTO.setCls(zxbzbgpcls);
@@ -100,9 +98,34 @@ public class BxgxfxService {
 		zxbzbGpDTO.setJscz(zxbzbgpjscz);
 		zxbzbGpDTO.setJsczzb(zxbzbgpjsczzb);
 		
+		List<BxhcpcgxAnalyseDTO> zxbzbdpclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpCls(year,zxbzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxbzbdphcclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpHcCls(year,zxbzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxbzbdpjsclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsCls(year,zxbzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxbzbdpjsczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsCz(year,zxbzbhcpcjz);
+		List<BxhcpcgxAnalyseDTO> zxbzbdpjszczs = bxgxfxMapper.bxhcpcgxAnalyseZxbzbDpJsZcz(year,zxbzbhcpcjz);
+		Integer zxbzbdpcls = zxbzbdpclss.get(0).getCls();
+		Integer zxbzbdphccls = zxbzbdphcclss.get(0).getHccls();
+		Double zxbzbdphcpcjz = ToolKits.divid(zxbzbdphccls, zxbzbdpcls);
+		Integer zxbzbdpjscls = zxbzbdpjsclss.get(0).getJscls();
+		Double zxbzbdpjsclszb = ToolKits.divid(zxbzbdpjscls*100, zxbzbdpcls);
+		Double zxbzbdpjscsjz = ToolKits.divid(zxbzbdpjscls*100, zxbzbdphccls);
+		Double zxbzbdpjscz = zxbzbdpjsczs.get(0).getJscz();
+		Double zxbzbdpjszcz = zxbzbdpjszczs.get(0).getJscz();
+		Double zxbzbdpjsczzb = ToolKits.divid(zxbzbdpjscz*100, zxbzbdpjszcz);
+		BxhcpcgxAnalyseDTO zxbzbDpDTO = new BxhcpcgxAnalyseDTO();
+		zxbzbDpDTO.setZxkh("低频");
+		zxbzbDpDTO.setCls(zxbzbdpcls);
+		zxbzbDpDTO.setHccls(zxbzbdphccls);
+		zxbzbDpDTO.setHcpcjz(zxbzbdphcpcjz);
+		zxbzbDpDTO.setJscls(zxbzbdpjscls);
+		zxbzbDpDTO.setJsclszb(zxbzbdpjsclszb);
+		zxbzbDpDTO.setJscsjz(zxbzbdpjscsjz);
+		zxbzbDpDTO.setJscz(zxbzbdpjscz);
+		zxbzbDpDTO.setJsczzb(zxbzbdpjsczzb);
 		
 		bxhcpcgxAnalyseDTOs.add(zxbzbDTO);
 		bxhcpcgxAnalyseDTOs.add(zxbzbGpDTO);
+		bxhcpcgxAnalyseDTOs.add(zxbzbDpDTO);
 		return bxhcpcgxAnalyseDTOs;
 	}
 }
