@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.car.analyse.dto.BxhcgxAnalyseDTO;
 import com.car.analyse.dto.BxhcpcgxAnalyseDTO;
+import com.car.analyse.dto.XbywfxxblxAnalyseDTO;
 import com.car.analyse.mapper.BxgxfxMapper;
+import com.car.analyse.tools.Constants;
 import com.car.analyse.tools.ToolKits;
 
 @Service
@@ -196,5 +198,41 @@ public class BxgxfxService {
 		bxhcpcgxAnalyseDTOs.add(zxzbGpDTO);
 		bxhcpcgxAnalyseDTOs.add(zxzbDpDTO);
 		return bxhcpcgxAnalyseDTOs;
+	}
+	
+	public List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseByMonthRegin(int year,int monthFrom,int monthTo){
+		String dateFrom = year + Constants.buildMonthMap().get(monthFrom).split(",")[0];
+		String dateTo = year + Constants.buildMonthMap().get(monthTo).split(",")[1];
+		List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseDTOs = new ArrayList<XbywfxxblxAnalyseDTO>();
+		List<XbywfxxblxAnalyseDTO> snjps = bxgxfxMapper.xbywfxxblxAnalyseSnjp(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> xbzls = bxgxfxMapper.xbywfxxblxAnalyseXbzl(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> zbfs = bxgxfxMapper.xbywfxxblxAnalyseZbf(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> xbxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXbxBncj(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> xbxbfs = bxgxfxMapper.xbywfxxblxAnalyseXbxBf(year, dateFrom, dateTo);
+		
+		Integer snjp = snjps.get(0).getSnjp();
+		Integer xbzl = xbzls.get(0).getXbzl();
+		Double zbf = zbfs.get(0).getZbf();
+		Integer xbxbncj = xbxbncjs.get(0).getBncj();
+		Double xbxxzcgl = ToolKits.divid(xbxbncj, snjp);
+		Double xbxxbzb = ToolKits.divid(xbxbncj, xbzl);
+		Double bf = xbxbfs.get(0).getBf();
+		Double xbxbfzb = ToolKits.divid(bf, zbf);
+		Double xbxjj = ToolKits.divid(bf, xbxbncj);
+		
+		XbywfxxblxAnalyseDTO xxbDto = new XbywfxxblxAnalyseDTO();
+		xxbDto.setXblx("新续保");
+		xxbDto.setSnjp(snjp);
+		xxbDto.setXbzl(xbzl);
+		xxbDto.setZbf(zbf);
+		xxbDto.setBncj(xbxbncj);
+		xxbDto.setXzcgl(xbxxzcgl);
+		xxbDto.setXbzb(xbxxbzb);
+		xxbDto.setBf(bf);
+		xxbDto.setBfzb(xbxbfzb);
+		xxbDto.setJj(xbxjj);
+		
+		xbywfxxblxAnalyseDTOs.add(xxbDto);
+		return xbywfxxblxAnalyseDTOs;
 	}
 }

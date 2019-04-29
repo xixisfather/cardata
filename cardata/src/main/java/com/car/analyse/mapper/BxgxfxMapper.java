@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.car.analyse.dto.BxhcgxAnalyseDTO;
 import com.car.analyse.dto.BxhcpcgxAnalyseDTO;
+import com.car.analyse.dto.XbywfxxblxAnalyseDTO;
 
 public interface BxgxfxMapper {
 	
@@ -62,4 +63,16 @@ public interface BxgxfxMapper {
 	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZxzbDpJsCz(@Param("year") int year,@Param("dpcs") double dpcs);
 	
 	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZcz(@Param("year") int year);
+	
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseSnjp(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbzl(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseZbf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
 }

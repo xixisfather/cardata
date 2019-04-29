@@ -28,6 +28,21 @@
 		<result column="jsczzb" jdbcType="DOUBLE" property="jsczzb" />
 	</resultMap>
 
+	<resultMap id="XbywfxxblxBaseResultMap"
+		type="com.car.analyse.dto.XbywfxxblxAnalyseDTO">
+		<result column="xblx" jdbcType="VARCHAR" property="xblx" />
+		<result column="snjp" jdbcType="INTEGER" property="snjp" />
+		<result column="bncj" jdbcType="INTEGER" property="bncj" />
+		<result column="xzcgl" jdbcType="DOUBLE" property="xzcgl" />
+		<result column="xbzl" jdbcType="INTEGER" property="xbzl" />
+		<result column="xbzb" jdbcType="DOUBLE" property="xbzb" />
+		<result column="bf" jdbcType="DOUBLE" property="bf" />
+		<result column="zbf" jdbcType="DOUBLE" property="zbf" />
+		<result column="bfzb" jdbcType="DOUBLE" property="bfzb" />
+		<result column="jj" jdbcType="DOUBLE" property="jj" />
+		<result column="mbcgl" jdbcType="DOUBLE" property="mbcgl" />
+	</resultMap>
+
 	<select id="bxhcgxAnalyseXb" resultMap="BxhcgxBaseResultMap">
 		select
 		'${year}新保' as
@@ -987,11 +1002,77 @@
 		) t5
 	</select>
 
-
 	<select id="bxhcpcgxAnalyseZcz"
 		resultMap="BxhcpcgxBaseResultMap">
 		select sum(wxsrll) as jscz
 		from
 		${year}shsj
 	</select>
+
+
+	<select id="xbywfxxblxAnalyseSnjp"
+		resultMap="XbywfxxblxBaseResultMap">
+		select count(cjh) as snjp
+		from
+		(
+		select cjh from ${year-1}xbsj
+		where qdrq &gt;=DATE_ADD(#{dateFrom},INTERVAL -1 YEAR) and qdrq
+		&lt;=DATE_ADD(#{dateTo},INTERVAL -1 YEAR)
+		union ALL
+		select cjh from
+		${year-1}rbsj where chudanrq &gt;=DATE_ADD(#{dateFrom},INTERVAL -1
+		YEAR) and chudanrq
+		&lt;=DATE_ADD(#{dateTo},INTERVAL -1 YEAR)
+		union all
+		select vin as cjh from ${year-1}shsj where DATE_FORMAT(jssj,
+		'%Y-%m-%d')
+		&gt;=DATE_ADD(#{dateFrom},INTERVAL -1 YEAR) and
+		DATE_FORMAT(jssj,
+		'%Y-%m-%d') &lt;=DATE_ADD(#{dateTo},INTERVAL -1 YEAR)
+		) t
+	</select>
+
+	<select id="xbywfxxblxAnalyseXbxBncj"
+		resultMap="XbywfxxblxBaseResultMap">
+		select count(cjh) as bncj from
+		${year}rbsj where chudanrq
+		&gt;= #{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+		and cjh in (select cjh
+		from ${year-1}xbsj)
+	</select>
+
+	<select id="xbywfxxblxAnalyseXbzl"
+		resultMap="XbywfxxblxBaseResultMap">
+		select count(cjh) as xbzl from
+		${year}rbsj where chudanrq
+		&gt;= #{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+	</select>
+
+	<select id="xbywfxxblxAnalyseXbxBf"
+		resultMap="XbywfxxblxBaseResultMap">
+		select sum(zfy) as bf from
+		${year}rbsj where chudanrq
+		&gt;=
+		#{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+		and cjh in (select cjh
+		from
+		${year-1}xbsj)
+	</select>
+
+	<select id="xbywfxxblxAnalyseZbf"
+		resultMap="XbywfxxblxBaseResultMap">
+		select sum(zfy) as zbf from
+		${year}rbsj where chudanrq
+		&gt;=
+		#{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+	</select>
+
 </mapper>

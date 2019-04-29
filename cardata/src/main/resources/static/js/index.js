@@ -44,7 +44,7 @@ $(function() {
 						{
 							text : "续保业务分析",
 							attributes : {
-								url : '<iframe width="100%" height="100%" frameborder="0"  src="/shsjanalyse/toshsjanalyse" style="width:100%;height:100%;margin:0px 0px;"></iframe>'
+								url : '<iframe width="100%" height="100%" frameborder="0"  src="/bxgxfx/toxbywfxanalyse" style="width:100%;height:100%;margin:0px 0px;"></iframe>'
 							}
 						},
 						{

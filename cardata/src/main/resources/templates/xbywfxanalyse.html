@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>续保业务分析</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.7.0/demo/demo.css">
+<script type="text/javascript" src="/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script>
+	function doSearch() {
+		$('#xbywfxxblxAnalyseTable').datagrid('load', {
+			year : $('#year').val(),
+			monthFrom : $('#monthFrom').val(),
+			monthTo : $('#monthTo').val()
+		});
+	}
+</script>
+</head>
+
+<body>
+	<div style="padding: 3px">
+		年份 <input id="year" size="10"/>
+		&#160;&#160;
+		月份 <input id="monthFrom" size="5"> 至 <input id="monthTo" size="5">
+		&#160;&#160;
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+			onclick="doSearch()">查询</a>
+	</div>
+
+	<table id="xbywfxxblxAnalyseTable" class="easyui-datagrid"
+		url="/bxgxfx/xbywfxxblxanalysequery" fitColumns="true"
+		singleSelect="true">
+		<thead>
+			<tr>
+				<th field="xblx" width="10%">续保类型</th>
+				<th field="snjp" width="10%">上年基盘</th>
+				<th field="bncj" width="10%">本年成交</th>
+				<th field="xzcgl" width="10%">成功率（%）</th>
+				<th field="xbzl" width="10%">续保总量</th>
+				<th field="xbzb" width="10%">续保占比（%）</th>
+				<th field="bf" width="10%">保费</th>
+				<th field="zbf" width="10%">总保费</th>
+				<th field="bszb" width="10%">保费占比</th>
+				<th field="jj" width="10%">件均</th>
+				<th field="mbcgl" width="13%">目标成功率</th>
+			</tr>
+		</thead>
+	</table>
+</body>
+</html>
