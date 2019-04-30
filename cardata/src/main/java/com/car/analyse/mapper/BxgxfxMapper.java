@@ -67,12 +67,21 @@ public interface BxgxfxMapper {
 	
 	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseSnjp(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
 	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbzl(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseZbf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
 	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseZbf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXzxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXzxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXtxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXtxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
 	
 }

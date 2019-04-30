@@ -207,32 +207,85 @@ public class BxgxfxService {
 		List<XbywfxxblxAnalyseDTO> snjps = bxgxfxMapper.xbywfxxblxAnalyseSnjp(year, dateFrom, dateTo);
 		List<XbywfxxblxAnalyseDTO> xbzls = bxgxfxMapper.xbywfxxblxAnalyseXbzl(year, dateFrom, dateTo);
 		List<XbywfxxblxAnalyseDTO> zbfs = bxgxfxMapper.xbywfxxblxAnalyseZbf(year, dateFrom, dateTo);
+		
 		List<XbywfxxblxAnalyseDTO> xbxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXbxBncj(year, dateFrom, dateTo);
 		List<XbywfxxblxAnalyseDTO> xbxbfs = bxgxfxMapper.xbywfxxblxAnalyseXbxBf(year, dateFrom, dateTo);
+		
+		List<XbywfxxblxAnalyseDTO> xzxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXzxBncj(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> xzxbfs = bxgxfxMapper.xbywfxxblxAnalyseXzxBf(year, dateFrom, dateTo);
+		
+		List<XbywfxxblxAnalyseDTO> xtxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXtxBncj(year, dateFrom, dateTo);
+		List<XbywfxxblxAnalyseDTO> xtxbfs = bxgxfxMapper.xbywfxxblxAnalyseXtxBf(year, dateFrom, dateTo);
 		
 		Integer snjp = snjps.get(0).getSnjp();
 		Integer xbzl = xbzls.get(0).getXbzl();
 		Double zbf = zbfs.get(0).getZbf();
+		
 		Integer xbxbncj = xbxbncjs.get(0).getBncj();
-		Double xbxxzcgl = ToolKits.divid(xbxbncj, snjp);
-		Double xbxxbzb = ToolKits.divid(xbxbncj, xbzl);
-		Double bf = xbxbfs.get(0).getBf();
-		Double xbxbfzb = ToolKits.divid(bf, zbf);
-		Double xbxjj = ToolKits.divid(bf, xbxbncj);
+		Double xbxxzcgl = ToolKits.divid(xbxbncj*100, snjp);
+		Double xbxxbzb = ToolKits.divid(xbxbncj*100, xbzl);
+		Double xbxbf = xbxbfs.get(0).getBf();
+		Double xbxbfzb = ToolKits.divid(xbxbf, zbf);
+		Double xbxjj = ToolKits.divid(xbxbf, xbxbncj);
+		
 		
 		XbywfxxblxAnalyseDTO xxbDto = new XbywfxxblxAnalyseDTO();
 		xxbDto.setXblx("新续保");
 		xxbDto.setSnjp(snjp);
 		xxbDto.setXbzl(xbzl);
 		xxbDto.setZbf(zbf);
+		
 		xxbDto.setBncj(xbxbncj);
 		xxbDto.setXzcgl(xbxxzcgl);
 		xxbDto.setXbzb(xbxxbzb);
-		xxbDto.setBf(bf);
+		xxbDto.setBf(xbxbf);
 		xxbDto.setBfzb(xbxbfzb);
 		xxbDto.setJj(xbxjj);
 		
+		
+		Integer xzxbncj = xzxbncjs.get(0).getBncj();
+		Double xzxxzcgl = ToolKits.divid(xzxbncj*100, snjp);
+		Double xzxxbzb = ToolKits.divid(xzxbncj*100, xbzl);
+		Double xzxbf = xzxbfs.get(0).getBf();
+		Double xzxbfzb = ToolKits.divid(xzxbf, zbf);
+		Double xzxjj = ToolKits.divid(xzxbf, xzxbncj);
+		
+		XbywfxxblxAnalyseDTO xzxDto = new XbywfxxblxAnalyseDTO();
+		xzxDto.setXblx("续转续");
+		xzxDto.setSnjp(snjp);
+		xzxDto.setXbzl(xbzl);
+		xzxDto.setZbf(zbf);
+		
+		xzxDto.setBncj(xzxbncj);
+		xzxDto.setXzcgl(xzxxzcgl);
+		xzxDto.setXbzb(xzxxbzb);
+		xzxDto.setBf(xzxbf);
+		xzxDto.setBfzb(xzxbfzb);
+		xzxDto.setJj(xzxjj);
+		
+		Integer xtxbncj = xtxbncjs.get(0).getBncj();
+		Double xtxxzcgl = ToolKits.divid(xtxbncj*100, snjp);
+		Double xtxxbzb = ToolKits.divid(xtxbncj*100, xbzl);
+		Double xtxbf = xtxbfs.get(0).getBf();
+		Double xtxbfzb = ToolKits.divid(xtxbf, zbf);
+		Double xtxjj = ToolKits.divid(xtxbf, xtxbncj);
+		
+		XbywfxxblxAnalyseDTO xtxDto = new XbywfxxblxAnalyseDTO();
+		xtxDto.setXblx("新拓续");
+		xtxDto.setSnjp(snjp);
+		xtxDto.setXbzl(xbzl);
+		xtxDto.setZbf(zbf);
+		
+		xtxDto.setBncj(xtxbncj);
+		xtxDto.setXzcgl(xtxxzcgl);
+		xtxDto.setXbzb(xtxxbzb);
+		xtxDto.setBf(xtxbf);
+		xtxDto.setBfzb(xtxbfzb);
+		xtxDto.setJj(xtxjj);
+		
 		xbywfxxblxAnalyseDTOs.add(xxbDto);
+		xbywfxxblxAnalyseDTOs.add(xzxDto);
+		xbywfxxblxAnalyseDTOs.add(xtxDto);
 		return xbywfxxblxAnalyseDTOs;
 	}
 }

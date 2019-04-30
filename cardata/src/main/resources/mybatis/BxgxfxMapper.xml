@@ -1032,6 +1032,25 @@
 		) t
 	</select>
 
+	<select id="xbywfxxblxAnalyseXbzl"
+		resultMap="XbywfxxblxBaseResultMap">
+		select count(cjh) as xbzl from
+		${year}rbsj where chudanrq
+		&gt;= #{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+	</select>
+
+	<select id="xbywfxxblxAnalyseZbf"
+		resultMap="XbywfxxblxBaseResultMap">
+		select sum(zfy) as zbf from
+		${year}rbsj where chudanrq
+		&gt;=
+		#{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+	</select>
+
 	<select id="xbywfxxblxAnalyseXbxBncj"
 		resultMap="XbywfxxblxBaseResultMap">
 		select count(cjh) as bncj from
@@ -1041,15 +1060,6 @@
 		chudanrq &lt;= #{dateTo}
 		and cjh in (select cjh
 		from ${year-1}xbsj)
-	</select>
-
-	<select id="xbywfxxblxAnalyseXbzl"
-		resultMap="XbywfxxblxBaseResultMap">
-		select count(cjh) as xbzl from
-		${year}rbsj where chudanrq
-		&gt;= #{dateFrom}
-		and
-		chudanrq &lt;= #{dateTo}
 	</select>
 
 	<select id="xbywfxxblxAnalyseXbxBf"
@@ -1065,14 +1075,58 @@
 		${year-1}xbsj)
 	</select>
 
-	<select id="xbywfxxblxAnalyseZbf"
+
+	<select id="xbywfxxblxAnalyseXzxBncj"
 		resultMap="XbywfxxblxBaseResultMap">
-		select sum(zfy) as zbf from
+		select count(cjh) as bncj from
+		${year}rbsj where chudanrq
+		&gt;= #{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+		and cjh in (select cjh
+		from ${year-1}rbsj)
+	</select>
+
+	<select id="xbywfxxblxAnalyseXzxBf"
+		resultMap="XbywfxxblxBaseResultMap">
+		select sum(zfy) as bf from
 		${year}rbsj where chudanrq
 		&gt;=
 		#{dateFrom}
 		and
 		chudanrq &lt;= #{dateTo}
+		and cjh in (select cjh
+		from
+		${year-1}rbsj)
 	</select>
+
+
+	<select id="xbywfxxblxAnalyseXtxBncj"
+		resultMap="XbywfxxblxBaseResultMap">
+		select count(cjh) as bncj from
+		${year}rbsj where chudanrq
+		&gt;= #{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+		and cjh not in (select cjh
+		from ${year-1}xbsj)
+		and cjh not in (select cjh
+		from ${year-1}rbsj)
+	</select>
+
+	<select id="xbywfxxblxAnalyseXtxBf"
+		resultMap="XbywfxxblxBaseResultMap">
+		select sum(zfy) as bf from
+		${year}rbsj where chudanrq
+		&gt;=
+		#{dateFrom}
+		and
+		chudanrq &lt;= #{dateTo}
+		and cjh not in (select cjh
+		from ${year-1}xbsj)
+		and cjh not in (select cjh
+		from ${year-1}rbsj)
+	</select>
+
 
 </mapper>
