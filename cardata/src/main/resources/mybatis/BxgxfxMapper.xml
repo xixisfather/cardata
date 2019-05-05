@@ -1144,17 +1144,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1171,17 +1171,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 
 	</select>
@@ -1199,17 +1199,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1226,17 +1226,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1253,17 +1253,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh not in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1280,17 +1280,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh not in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1307,17 +1307,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh not in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 
@@ -1334,17 +1334,17 @@
 		cjh from
 		(
 		select
-		cjh from #{year-1}xbsj
+		cjh from ${year-1}xbsj
 		union ALL
 		select
 		cjh
 		from
-		#{year-1}rbsj
+		${year-1}rbsj
 		) t1
 		)
 		and cjh not in
 		(
-		select vin from #{year-1}shsj
+		select vin from ${year-1}shsj
 		)
 	</select>
 </mapper>

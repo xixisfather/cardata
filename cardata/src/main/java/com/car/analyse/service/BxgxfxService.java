@@ -232,6 +232,9 @@ public class BxgxfxService {
 		List<XbywfxAnalyseDTO> bzxzbbncjs = bxgxfxMapper.xbywfxxbkhAnalyseBzxzbBncj(year, dateFrom, dateTo);
 		List<XbywfxAnalyseDTO> bzxzbbfs = bxgxfxMapper.xbywfxxbkhAnalyseBzxzbBf(year, dateFrom, dateTo);
 		
+		List<XbywfxAnalyseDTO> bzxbzbbncjs = bxgxfxMapper.xbywfxxbkhAnalyseBzxBzbBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> bzxbzbbfs = bxgxfxMapper.xbywfxxbkhAnalyseBzxBzbBf(year, dateFrom, dateTo);
+		
 		Integer snjp = snjps.get(0).getSnjp();
 		Integer xbzl = xbzls.get(0).getXbzl();
 		Double zbf = zbfs.get(0).getZbf();
@@ -360,6 +363,27 @@ public class BxgxfxService {
 		bzxzbDto.setBfzb(bzxzbbfzb);
 		bzxzbDto.setJj(bzxzbjj);
 		
+		
+		Integer bzxbzbbncj = bzxbzbbncjs.get(0).getBncj();
+		Double bzxbzbxzcgl = ToolKits.divid(bzxbzbbncj*100, snjp);
+		Double bzxbzbxbzb = ToolKits.divid(bzxbzbbncj*100, xbzl);
+		Double bzxbzbbf = bzxbzbbfs.get(0).getBf();
+		Double bzxbzbbfzb = ToolKits.divid(bzxbzbbf*100, zbf);
+		Double bzxbzbjj = ToolKits.divid(bzxbzbbf, bzxbzbbncj);
+		
+		XbywfxAnalyseDTO bzxbzbDto = new XbywfxAnalyseDTO();
+		bzxbzbDto.setXblx("不在修不在保客户");
+		bzxbzbDto.setSnjp(snjp);
+		bzxbzbDto.setXbzl(xbzl);
+		bzxbzbDto.setZbf(zbf);
+		
+		bzxbzbDto.setBncj(bzxbzbbncj);
+		bzxbzbDto.setXzcgl(bzxbzbxzcgl);
+		bzxbzbDto.setXbzb(bzxbzbxbzb);
+		bzxbzbDto.setBf(bzxbzbbf);
+		bzxbzbDto.setBfzb(bzxbzbbfzb);
+		bzxbzbDto.setJj(bzxbzbjj);
+		
 		xbywfxxblxAnalyseXblxDTOs.add(xxbDto);
 		xbywfxxblxAnalyseXblxDTOs.add(xzxDto);
 		xbywfxxblxAnalyseXblxDTOs.add(xtxDto);
@@ -367,6 +391,7 @@ public class BxgxfxService {
 		xbywfxxblxAnalyseXbkhDTOs.add(zxzbDto);
 		xbywfxxblxAnalyseXbkhDTOs.add(zxbzbDto);
 		xbywfxxblxAnalyseXbkhDTOs.add(bzxzbDto);
+		xbywfxxblxAnalyseXbkhDTOs.add(bzxbzbDto);
 		
 		xbywfxxblxAnalyseMap.put("xblx", xbywfxxblxAnalyseXblxDTOs);
 		xbywfxxblxAnalyseMap.put("xbkh", xbywfxxblxAnalyseXbkhDTOs);
