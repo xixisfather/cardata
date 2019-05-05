@@ -1,6 +1,6 @@
 package com.car.analyse.dto;
 
-public class XbywfxxblxAnalyseDTO {
+public class XbywfxAnalyseDTO {
 
 	private String xblx;
 	

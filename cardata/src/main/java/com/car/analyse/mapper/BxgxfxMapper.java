@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.car.analyse.dto.BxhcgxAnalyseDTO;
 import com.car.analyse.dto.BxhcpcgxAnalyseDTO;
-import com.car.analyse.dto.XbywfxxblxAnalyseDTO;
+import com.car.analyse.dto.XbywfxAnalyseDTO;
 
 public interface BxgxfxMapper {
 	
@@ -65,23 +65,40 @@ public interface BxgxfxMapper {
 	List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseZcz(@Param("year") int year);
 	
 	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseSnjp(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	List<XbywfxAnalyseDTO> xbywfxAnalyseSnjp(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbzl(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	List<XbywfxAnalyseDTO> xbywfxAnalyseXbzl(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseZbf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXbxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXzxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXzxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXtxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
-	
-	List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseXtxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	List<XbywfxAnalyseDTO> xbywfxAnalyseZbf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
 	
 	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXbxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXbxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXzxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXzxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXtxBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXtxBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseZxzbBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseZxzbBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseZxbzbBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseZxbzbBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseBzxzbBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseBzxzbBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseBzxBzbBncj(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+	
+	List<XbywfxAnalyseDTO> xbywfxxbkhAnalyseBzxBzbBf(@Param("year") int year,@Param("dateFrom") String dateFrom,@Param("dateTo") String dateTo);
+
 }

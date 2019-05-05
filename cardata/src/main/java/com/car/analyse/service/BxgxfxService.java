@@ -1,14 +1,16 @@
 package com.car.analyse.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.car.analyse.dto.BxhcgxAnalyseDTO;
 import com.car.analyse.dto.BxhcpcgxAnalyseDTO;
-import com.car.analyse.dto.XbywfxxblxAnalyseDTO;
+import com.car.analyse.dto.XbywfxAnalyseDTO;
 import com.car.analyse.mapper.BxgxfxMapper;
 import com.car.analyse.tools.Constants;
 import com.car.analyse.tools.ToolKits;
@@ -48,7 +50,7 @@ public class BxgxfxService {
 		return bxhcgxAnalyseDTOs;
 	}
 	
-	public List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseByYear(int year) {
+	public  List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseByYear(int year) {
 		List<BxhcpcgxAnalyseDTO> bxhcpcgxAnalyseDTOs = new ArrayList<BxhcpcgxAnalyseDTO>();
 		List<BxhcpcgxAnalyseDTO> zxbzbclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbCls(year);
 		List<BxhcpcgxAnalyseDTO> zxbzbhcclss = bxgxfxMapper.bxhcpcgxAnalyseZxbzbHcCls(year);
@@ -200,22 +202,35 @@ public class BxgxfxService {
 		return bxhcpcgxAnalyseDTOs;
 	}
 	
-	public List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseByMonthRegin(int year,int monthFrom,int monthTo){
+	public Map<String,List<XbywfxAnalyseDTO>> xbywfxxblxAnalyseByMonthRegin(int year,int monthFrom,int monthTo){
 		String dateFrom = year + Constants.buildMonthMap().get(monthFrom).split(",")[0];
 		String dateTo = year + Constants.buildMonthMap().get(monthTo).split(",")[1];
-		List<XbywfxxblxAnalyseDTO> xbywfxxblxAnalyseDTOs = new ArrayList<XbywfxxblxAnalyseDTO>();
-		List<XbywfxxblxAnalyseDTO> snjps = bxgxfxMapper.xbywfxxblxAnalyseSnjp(year, dateFrom, dateTo);
-		List<XbywfxxblxAnalyseDTO> xbzls = bxgxfxMapper.xbywfxxblxAnalyseXbzl(year, dateFrom, dateTo);
-		List<XbywfxxblxAnalyseDTO> zbfs = bxgxfxMapper.xbywfxxblxAnalyseZbf(year, dateFrom, dateTo);
 		
-		List<XbywfxxblxAnalyseDTO> xbxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXbxBncj(year, dateFrom, dateTo);
-		List<XbywfxxblxAnalyseDTO> xbxbfs = bxgxfxMapper.xbywfxxblxAnalyseXbxBf(year, dateFrom, dateTo);
+		Map<String, List<XbywfxAnalyseDTO>> xbywfxxblxAnalyseMap = new HashMap<String, List<XbywfxAnalyseDTO>>();
+		List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXblxDTOs = new ArrayList<XbywfxAnalyseDTO>();
+		List<XbywfxAnalyseDTO> xbywfxxblxAnalyseXbkhDTOs = new ArrayList<XbywfxAnalyseDTO>();
 		
-		List<XbywfxxblxAnalyseDTO> xzxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXzxBncj(year, dateFrom, dateTo);
-		List<XbywfxxblxAnalyseDTO> xzxbfs = bxgxfxMapper.xbywfxxblxAnalyseXzxBf(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> snjps = bxgxfxMapper.xbywfxAnalyseSnjp(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> xbzls = bxgxfxMapper.xbywfxAnalyseXbzl(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> zbfs = bxgxfxMapper.xbywfxAnalyseZbf(year, dateFrom, dateTo);
 		
-		List<XbywfxxblxAnalyseDTO> xtxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXtxBncj(year, dateFrom, dateTo);
-		List<XbywfxxblxAnalyseDTO> xtxbfs = bxgxfxMapper.xbywfxxblxAnalyseXtxBf(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> xbxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXbxBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> xbxbfs = bxgxfxMapper.xbywfxxblxAnalyseXbxBf(year, dateFrom, dateTo);
+		
+		List<XbywfxAnalyseDTO> xzxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXzxBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> xzxbfs = bxgxfxMapper.xbywfxxblxAnalyseXzxBf(year, dateFrom, dateTo);
+		
+		List<XbywfxAnalyseDTO> xtxbncjs = bxgxfxMapper.xbywfxxblxAnalyseXtxBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> xtxbfs = bxgxfxMapper.xbywfxxblxAnalyseXtxBf(year, dateFrom, dateTo);
+		
+		List<XbywfxAnalyseDTO> zxzbbncjs = bxgxfxMapper.xbywfxxbkhAnalyseZxzbBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> zxzbbfs = bxgxfxMapper.xbywfxxbkhAnalyseZxzbBf(year, dateFrom, dateTo);
+		
+		List<XbywfxAnalyseDTO> zxbzbbncjs = bxgxfxMapper.xbywfxxbkhAnalyseZxbzbBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> zxbzbbfs = bxgxfxMapper.xbywfxxbkhAnalyseZxbzbBf(year, dateFrom, dateTo);
+		
+		List<XbywfxAnalyseDTO> bzxzbbncjs = bxgxfxMapper.xbywfxxbkhAnalyseBzxzbBncj(year, dateFrom, dateTo);
+		List<XbywfxAnalyseDTO> bzxzbbfs = bxgxfxMapper.xbywfxxbkhAnalyseBzxzbBf(year, dateFrom, dateTo);
 		
 		Integer snjp = snjps.get(0).getSnjp();
 		Integer xbzl = xbzls.get(0).getXbzl();
@@ -225,11 +240,11 @@ public class BxgxfxService {
 		Double xbxxzcgl = ToolKits.divid(xbxbncj*100, snjp);
 		Double xbxxbzb = ToolKits.divid(xbxbncj*100, xbzl);
 		Double xbxbf = xbxbfs.get(0).getBf();
-		Double xbxbfzb = ToolKits.divid(xbxbf, zbf);
+		Double xbxbfzb = ToolKits.divid(xbxbf*100, zbf);
 		Double xbxjj = ToolKits.divid(xbxbf, xbxbncj);
 		
 		
-		XbywfxxblxAnalyseDTO xxbDto = new XbywfxxblxAnalyseDTO();
+		XbywfxAnalyseDTO xxbDto = new XbywfxAnalyseDTO();
 		xxbDto.setXblx("新续保");
 		xxbDto.setSnjp(snjp);
 		xxbDto.setXbzl(xbzl);
@@ -247,10 +262,10 @@ public class BxgxfxService {
 		Double xzxxzcgl = ToolKits.divid(xzxbncj*100, snjp);
 		Double xzxxbzb = ToolKits.divid(xzxbncj*100, xbzl);
 		Double xzxbf = xzxbfs.get(0).getBf();
-		Double xzxbfzb = ToolKits.divid(xzxbf, zbf);
+		Double xzxbfzb = ToolKits.divid(xzxbf*100, zbf);
 		Double xzxjj = ToolKits.divid(xzxbf, xzxbncj);
 		
-		XbywfxxblxAnalyseDTO xzxDto = new XbywfxxblxAnalyseDTO();
+		XbywfxAnalyseDTO xzxDto = new XbywfxAnalyseDTO();
 		xzxDto.setXblx("续转续");
 		xzxDto.setSnjp(snjp);
 		xzxDto.setXbzl(xbzl);
@@ -267,10 +282,10 @@ public class BxgxfxService {
 		Double xtxxzcgl = ToolKits.divid(xtxbncj*100, snjp);
 		Double xtxxbzb = ToolKits.divid(xtxbncj*100, xbzl);
 		Double xtxbf = xtxbfs.get(0).getBf();
-		Double xtxbfzb = ToolKits.divid(xtxbf, zbf);
+		Double xtxbfzb = ToolKits.divid(xtxbf*100, zbf);
 		Double xtxjj = ToolKits.divid(xtxbf, xtxbncj);
 		
-		XbywfxxblxAnalyseDTO xtxDto = new XbywfxxblxAnalyseDTO();
+		XbywfxAnalyseDTO xtxDto = new XbywfxAnalyseDTO();
 		xtxDto.setXblx("新拓续");
 		xtxDto.setSnjp(snjp);
 		xtxDto.setXbzl(xbzl);
@@ -283,9 +298,78 @@ public class BxgxfxService {
 		xtxDto.setBfzb(xtxbfzb);
 		xtxDto.setJj(xtxjj);
 		
-		xbywfxxblxAnalyseDTOs.add(xxbDto);
-		xbywfxxblxAnalyseDTOs.add(xzxDto);
-		xbywfxxblxAnalyseDTOs.add(xtxDto);
-		return xbywfxxblxAnalyseDTOs;
+		
+		Integer zxzbbncj = zxzbbncjs.get(0).getBncj();
+		Double zxzbxzcgl = ToolKits.divid(zxzbbncj*100, snjp);
+		Double zxzbxbzb = ToolKits.divid(zxzbbncj*100, xbzl);
+		Double zxzbbf = zxzbbfs.get(0).getBf();
+		Double zxzbbfzb = ToolKits.divid(zxzbbf*100, zbf);
+		Double zxzbjj = ToolKits.divid(zxzbbf, zxzbbncj);
+		
+		XbywfxAnalyseDTO zxzbDto = new XbywfxAnalyseDTO();
+		zxzbDto.setXblx("在修在保客户");
+		zxzbDto.setSnjp(snjp);
+		zxzbDto.setXbzl(xbzl);
+		zxzbDto.setZbf(zbf);
+		
+		zxzbDto.setBncj(zxzbbncj);
+		zxzbDto.setXzcgl(zxzbxzcgl);
+		zxzbDto.setXbzb(zxzbxbzb);
+		zxzbDto.setBf(zxzbbf);
+		zxzbDto.setBfzb(zxzbbfzb);
+		zxzbDto.setJj(zxzbjj);
+		
+		
+		Integer zxbzbbncj = zxbzbbncjs.get(0).getBncj();
+		Double zxbzbxzcgl = ToolKits.divid(zxbzbbncj*100, snjp);
+		Double zxbzbxbzb = ToolKits.divid(zxbzbbncj*100, xbzl);
+		Double zxbzbbf = zxbzbbfs.get(0).getBf();
+		Double zxbzbbfzb = ToolKits.divid(zxbzbbf*100, zbf);
+		Double zxbzbjj = ToolKits.divid(zxbzbbf, zxbzbbncj);
+		
+		XbywfxAnalyseDTO zxbzbDto = new XbywfxAnalyseDTO();
+		zxbzbDto.setXblx("在修不在保客户");
+		zxbzbDto.setSnjp(snjp);
+		zxbzbDto.setXbzl(xbzl);
+		zxbzbDto.setZbf(zbf);
+		
+		zxbzbDto.setBncj(zxbzbbncj);
+		zxbzbDto.setXzcgl(zxbzbxzcgl);
+		zxbzbDto.setXbzb(zxbzbxbzb);
+		zxbzbDto.setBf(zxbzbbf);
+		zxbzbDto.setBfzb(zxbzbbfzb);
+		zxbzbDto.setJj(zxbzbjj);
+		
+		Integer bzxzbbncj = bzxzbbncjs.get(0).getBncj();
+		Double bzxzbxzcgl = ToolKits.divid(bzxzbbncj*100, snjp);
+		Double bzxzbxbzb = ToolKits.divid(bzxzbbncj*100, xbzl);
+		Double bzxzbbf = bzxzbbfs.get(0).getBf();
+		Double bzxzbbfzb = ToolKits.divid(bzxzbbf*100, zbf);
+		Double bzxzbjj = ToolKits.divid(bzxzbbf, bzxzbbncj);
+		
+		XbywfxAnalyseDTO bzxzbDto = new XbywfxAnalyseDTO();
+		bzxzbDto.setXblx("不在修在保客户");
+		bzxzbDto.setSnjp(snjp);
+		bzxzbDto.setXbzl(xbzl);
+		bzxzbDto.setZbf(zbf);
+		
+		bzxzbDto.setBncj(bzxzbbncj);
+		bzxzbDto.setXzcgl(bzxzbxzcgl);
+		bzxzbDto.setXbzb(bzxzbxbzb);
+		bzxzbDto.setBf(bzxzbbf);
+		bzxzbDto.setBfzb(bzxzbbfzb);
+		bzxzbDto.setJj(bzxzbjj);
+		
+		xbywfxxblxAnalyseXblxDTOs.add(xxbDto);
+		xbywfxxblxAnalyseXblxDTOs.add(xzxDto);
+		xbywfxxblxAnalyseXblxDTOs.add(xtxDto);
+		
+		xbywfxxblxAnalyseXbkhDTOs.add(zxzbDto);
+		xbywfxxblxAnalyseXbkhDTOs.add(zxbzbDto);
+		xbywfxxblxAnalyseXbkhDTOs.add(bzxzbDto);
+		
+		xbywfxxblxAnalyseMap.put("xblx", xbywfxxblxAnalyseXblxDTOs);
+		xbywfxxblxAnalyseMap.put("xbkh", xbywfxxblxAnalyseXbkhDTOs);
+		return xbywfxxblxAnalyseMap;
 	}
 }

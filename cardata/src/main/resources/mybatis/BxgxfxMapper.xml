@@ -28,8 +28,8 @@
 		<result column="jsczzb" jdbcType="DOUBLE" property="jsczzb" />
 	</resultMap>
 
-	<resultMap id="XbywfxxblxBaseResultMap"
-		type="com.car.analyse.dto.XbywfxxblxAnalyseDTO">
+	<resultMap id="XbywfxBaseResultMap"
+		type="com.car.analyse.dto.XbywfxAnalyseDTO">
 		<result column="xblx" jdbcType="VARCHAR" property="xblx" />
 		<result column="snjp" jdbcType="INTEGER" property="snjp" />
 		<result column="bncj" jdbcType="INTEGER" property="bncj" />
@@ -1010,13 +1010,14 @@
 	</select>
 
 
-	<select id="xbywfxxblxAnalyseSnjp"
-		resultMap="XbywfxxblxBaseResultMap">
-		select count(cjh) as snjp
+	<select id="xbywfxAnalyseSnjp" resultMap="XbywfxBaseResultMap">
+		select count(distinct
+		cjh) as snjp
 		from
 		(
 		select cjh from ${year-1}xbsj
-		where qdrq &gt;=DATE_ADD(#{dateFrom},INTERVAL -1 YEAR) and qdrq
+		where qdrq
+		&gt;=DATE_ADD(#{dateFrom},INTERVAL -1 YEAR) and qdrq
 		&lt;=DATE_ADD(#{dateTo},INTERVAL -1 YEAR)
 		union ALL
 		select cjh from
@@ -1032,27 +1033,28 @@
 		) t
 	</select>
 
-	<select id="xbywfxxblxAnalyseXbzl"
-		resultMap="XbywfxxblxBaseResultMap">
-		select count(cjh) as xbzl from
+	<select id="xbywfxAnalyseXbzl" resultMap="XbywfxBaseResultMap">
+		select count(distinct
+		cjh) as xbzl from
 		${year}rbsj where chudanrq
 		&gt;= #{dateFrom}
 		and
 		chudanrq &lt;= #{dateTo}
 	</select>
 
-	<select id="xbywfxxblxAnalyseZbf"
-		resultMap="XbywfxxblxBaseResultMap">
-		select sum(zfy) as zbf from
+	<select id="xbywfxAnalyseZbf" resultMap="XbywfxBaseResultMap">
+		select sum(zfy) as zbf
+		from
 		${year}rbsj where chudanrq
 		&gt;=
 		#{dateFrom}
 		and
-		chudanrq &lt;= #{dateTo}
+		chudanrq &lt;=
+		#{dateTo}
 	</select>
 
 	<select id="xbywfxxblxAnalyseXbxBncj"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select count(cjh) as bncj from
 		${year}rbsj where chudanrq
 		&gt;= #{dateFrom}
@@ -1063,7 +1065,7 @@
 	</select>
 
 	<select id="xbywfxxblxAnalyseXbxBf"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select sum(zfy) as bf from
 		${year}rbsj where chudanrq
 		&gt;=
@@ -1077,7 +1079,7 @@
 
 
 	<select id="xbywfxxblxAnalyseXzxBncj"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select count(cjh) as bncj from
 		${year}rbsj where chudanrq
 		&gt;= #{dateFrom}
@@ -1088,7 +1090,7 @@
 	</select>
 
 	<select id="xbywfxxblxAnalyseXzxBf"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select sum(zfy) as bf from
 		${year}rbsj where chudanrq
 		&gt;=
@@ -1102,7 +1104,7 @@
 
 
 	<select id="xbywfxxblxAnalyseXtxBncj"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select count(cjh) as bncj from
 		${year}rbsj where chudanrq
 		&gt;= #{dateFrom}
@@ -1115,7 +1117,7 @@
 	</select>
 
 	<select id="xbywfxxblxAnalyseXtxBf"
-		resultMap="XbywfxxblxBaseResultMap">
+		resultMap="XbywfxBaseResultMap">
 		select sum(zfy) as bf from
 		${year}rbsj where chudanrq
 		&gt;=
@@ -1123,10 +1125,226 @@
 		and
 		chudanrq &lt;= #{dateTo}
 		and cjh not in (select cjh
-		from ${year-1}xbsj)
+		from
+		${year-1}xbsj)
 		and cjh not in (select cjh
 		from ${year-1}rbsj)
 	</select>
 
+	<select id="xbywfxxbkhAnalyseZxzbBncj"
+		resultMap="XbywfxBaseResultMap">
+		select count(distinct cjh) as bncj from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
 
+	<select id="xbywfxxbkhAnalyseZxzbBf"
+		resultMap="XbywfxBaseResultMap">
+		select sum(zfy) as bf from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh in
+		(
+		select vin from #{year-1}shsj
+		)
+
+	</select>
+
+	<select id="xbywfxxbkhAnalyseZxbzbBncj"
+		resultMap="XbywfxBaseResultMap">
+		select count(distinct cjh) as bncj from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh not in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
+
+	<select id="xbywfxxbkhAnalyseZxbzbBf"
+		resultMap="XbywfxBaseResultMap">
+		select sum(zfy) as bf from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh not in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
+
+	<select id="xbywfxxbkhAnalyseBzxzbBncj"
+		resultMap="XbywfxBaseResultMap">
+		select count(distinct cjh) as bncj from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh not in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
+
+	<select id="xbywfxxbkhAnalyseBzxzbBf"
+		resultMap="XbywfxBaseResultMap">
+		select sum(zfy) as bf from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh not in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
+
+	<select id="xbywfxxbkhAnalyseBzxBzbBncj"
+		resultMap="XbywfxBaseResultMap">
+		select count(distinct cjh) as bncj from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh not in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh not in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
+
+	<select id="xbywfxxbkhAnalyseBzxBzbBf"
+		resultMap="XbywfxBaseResultMap">
+		select sum(zfy) as bf from ${year}rbsj
+		where
+		chudanrq >=
+		#{dateFrom}
+		and chudanrq &lt;= #{dateTo}
+		and cjh not in
+		(
+		select
+		cjh from
+		(
+		select
+		cjh from #{year-1}xbsj
+		union ALL
+		select
+		cjh
+		from
+		#{year-1}rbsj
+		) t1
+		)
+		and cjh not in
+		(
+		select vin from #{year-1}shsj
+		)
+	</select>
 </mapper>
