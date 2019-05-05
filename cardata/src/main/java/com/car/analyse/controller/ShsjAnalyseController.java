@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -26,8 +27,11 @@ public class ShsjAnalyseController {
 	
 	@PostMapping(path="/shsjanalysequery")
 	@ResponseBody
-	public Object queryStaffUser() {
-		List<ShsjAnalyseDTO> shsjAnalyses = shsjService.shsjAnalyse();
+	public Object queryStaffUser(@RequestParam(value = "year")Integer year) {
+		if(null == year) {
+			return null;
+		}
+		List<ShsjAnalyseDTO> shsjAnalyses = shsjService.shsjAnalyse(year);
 		return JSON.toJSON(shsjAnalyses);
 	}
 

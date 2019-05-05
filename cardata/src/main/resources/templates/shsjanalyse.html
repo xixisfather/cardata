@@ -14,8 +14,19 @@
 <script type="text/javascript"
 	src="../jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
 </head>
-
+<script>
+	function doSearch() {
+		$('#shsjAnalyseTable').datagrid('load', {
+			year : $('#year').val()
+		});
+	}
+</script>
 <body>
+	<div style="padding: 3px">
+		年份 <input id="year" style="line-height: 26px; border: 1px solid #ccc">
+		<a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'icon-search'" onclick="doSearch()">查询</a>
+	</div>
 	<table id="shsjAnalyseTable" title="售后数据分析" class="easyui-datagrid"
 		url="/shsjanalyse/shsjanalysequery" fitColumns="true"
 		singleSelect="true">

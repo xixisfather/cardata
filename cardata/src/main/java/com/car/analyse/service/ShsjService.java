@@ -14,14 +14,10 @@ public class ShsjService {
 	@Autowired
 	private ShsjMapper shsjMapper;
 	
-	public List<ShsjAnalyseDTO> shsjAnalyse() {
-		ShsjAnalyseDTO shsjAnalyseDTO2017 = shsjMapper.shsjAnalyse(2017);
-		ShsjAnalyseDTO shsjAnalyseDTO2018 = shsjMapper.shsjAnalyse(2018);
-		ShsjAnalyseDTO shsjAnalyseDTO2019 = shsjMapper.shsjAnalyse(2019);
+	public List<ShsjAnalyseDTO> shsjAnalyse(int year) {
+		ShsjAnalyseDTO shsjAnalyseDTO = shsjMapper.shsjAnalyse(year);
 		List<ShsjAnalyseDTO> shsjAnalyseDTOs = new ArrayList<ShsjAnalyseDTO>();
-		shsjAnalyseDTOs.add(shsjAnalyseDTO2017);
-		shsjAnalyseDTOs.add(shsjAnalyseDTO2018);
-		shsjAnalyseDTOs.add(shsjAnalyseDTO2019);
+		shsjAnalyseDTOs.add(shsjAnalyseDTO);
 		return shsjAnalyseDTOs;
 	}
 }
