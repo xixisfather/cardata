@@ -13,11 +13,18 @@ import com.car.analyse.mapper.ShsjMapper;
 public class ShsjService {
 	@Autowired
 	private ShsjMapper shsjMapper;
-	
-	public List<ShsjAnalyseDTO> shsjAnalyse(int year) {
-		ShsjAnalyseDTO shsjAnalyseDTO = shsjMapper.shsjAnalyse(year);
+
+	public List<ShsjAnalyseDTO> shsjAnalyse(int yearFrom, int yearTo) {
 		List<ShsjAnalyseDTO> shsjAnalyseDTOs = new ArrayList<ShsjAnalyseDTO>();
-		shsjAnalyseDTOs.add(shsjAnalyseDTO);
+		for (int year = yearFrom; year <= yearTo; year++) {
+			ShsjAnalyseDTO shsjAnalyseDTO = shsjAnalyse(year);
+			shsjAnalyseDTOs.add(shsjAnalyseDTO);
+		}
 		return shsjAnalyseDTOs;
+	}
+
+	private ShsjAnalyseDTO shsjAnalyse(int year) {
+		ShsjAnalyseDTO shsjAnalyseDTO = shsjMapper.shsjAnalyse(year);
+		return shsjAnalyseDTO;
 	}
 }

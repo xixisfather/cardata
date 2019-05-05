@@ -27,11 +27,11 @@ public class ShsjAnalyseController {
 	
 	@PostMapping(path="/shsjanalysequery")
 	@ResponseBody
-	public Object queryStaffUser(@RequestParam(value = "year")Integer year) {
-		if(null == year) {
+	public Object queryStaffUser(@RequestParam(value = "yearFrom")Integer yearFrom,@RequestParam(value = "yearTo")Integer yearTo) {
+		if(null == yearFrom||null == yearTo) {
 			return null;
 		}
-		List<ShsjAnalyseDTO> shsjAnalyses = shsjService.shsjAnalyse(year);
+		List<ShsjAnalyseDTO> shsjAnalyses = shsjService.shsjAnalyse(yearFrom,yearTo);
 		return JSON.toJSON(shsjAnalyses);
 	}
 

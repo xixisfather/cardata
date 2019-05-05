@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>售后数据分析</title>
+<title>产值构成分析</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css"
 	href="../jquery-easyui-1.7.0/themes/default/easyui.css">
@@ -17,17 +17,20 @@
 <script>
 	function doSearch() {
 		$('#shsjAnalyseTable').datagrid('load', {
-			year : $('#year').val()
+			yearFrom : $('#yearFrom').val(),
+			yearTo : $('#yearTo').val()
 		});
 	}
 </script>
 <body>
 	<div style="padding: 3px">
-		年份 <input id="year" style="line-height: 26px; border: 1px solid #ccc">
+		年份 
+		 <input id="yearFrom" size="8"> 至 <input id="yearTo" size="8">
+		&#160;&#160;
 		<a href="#" class="easyui-linkbutton"
 			data-options="iconCls:'icon-search'" onclick="doSearch()">查询</a>
 	</div>
-	<table id="shsjAnalyseTable" title="售后数据分析" class="easyui-datagrid"
+	<table id="shsjAnalyseTable" title="产值构成分析" class="easyui-datagrid"
 		url="/shsjanalyse/shsjanalysequery" fitColumns="true"
 		singleSelect="true">
 		<thead>
